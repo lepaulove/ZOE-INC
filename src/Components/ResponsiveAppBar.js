@@ -96,11 +96,24 @@ const ResponsiveAppBar = ( props ) => {
                         display: { xs: 'block', md: 'none' },
                     }}
                     >
-                    {pages.map((page) => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{page}</Typography>
+                        <MenuItem component='a' href='/' onClick={() => { props.appBarProps.scrollController(props.appBarProps.historyRef); handleCloseNavMenu()}}>
+                            <Typography textAlign="center">History</Typography>
                         </MenuItem>
-                    ))}
+                        <MenuItem  onClick={() => { props.appBarProps.scrollController(props.appBarProps.purposeRef); handleCloseNavMenu()}}>
+                            <Typography textAlign="center">Purpose</Typography>
+                        </MenuItem>
+                        <MenuItem onClick={() => { props.appBarProps.scrollController(props.appBarProps.aboutRef); handleCloseNavMenu()}}>
+                            <Typography textAlign="center">About</Typography>
+                        </MenuItem>
+                        <MenuItem onClick={() => { props.appBarProps.scrollController(props.appBarProps.contactRef); handleCloseNavMenu()}}>
+                            <Typography textAlign="center">Contact</Typography>
+                        </MenuItem>
+                        <MenuItem onClick={() => { props.appBarProps.scrollController(props.appBarProps.getInvolvedRef); handleCloseNavMenu()}}>
+                            <Typography textAlign="center">Get Involved</Typography>
+                        </MenuItem>
+                        <MenuItem component='a' href='/login' onClick={() => { handleCloseNavMenu() }}>
+                            <Typography textAlign="center">Login</Typography>
+                        </MenuItem>
                     </Menu>
                 </Box>
                 <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -108,7 +121,7 @@ const ResponsiveAppBar = ( props ) => {
                     variant="h5"
                     noWrap
                     component="a"
-                    href=""
+                    href="/"
                     sx={{
                     mr: 2,
                     display: { xs: 'flex', md: 'none' },

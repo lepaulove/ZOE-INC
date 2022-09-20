@@ -6,7 +6,7 @@ const HistorySection = () => {
 
     return(
         <div style={{backgroundColor:'dodgerblue'}}>
-            <Container maxWidth='xl' sx={{display:'flex', justifyContent:'center', height:'100vh', backgroundColor:'dodgerblue'}}>
+            <Container maxWidth='xl' sx={{display:'flex', justifyContent:'center', height:'75vh', backgroundColor:'dodgerblue'}}>
                 <h1>HISTORY</h1>
             </Container>
         </div>
