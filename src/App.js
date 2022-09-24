@@ -9,6 +9,7 @@ import Contact from './Sections/Contact'
 import GetInvolved from './Sections/Get-Involved';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
+import CreateAccount from './Pages/CreateAccount';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Routes>
                 <Route exact path='/' element={<Home historyRef={historyRef} purposeRef={purposeRef} aboutRef={aboutRef} contactRef={contactRef} getInvolvedRef={getInvolvedRef}/>}/>
                 <Route exact path='/login' element={<Login />}/>
+                <Route exact path='/Create-account' element={<CreateAccount />}/>
             </Routes>
         </Router>
     </div>

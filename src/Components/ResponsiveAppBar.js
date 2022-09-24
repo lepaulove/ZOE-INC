@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,14 +11,18 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { createTheme, ThemeProvider } from '@mui/material';
 import NavButton from './NavButtons';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../State/UserSlice';
+import { auth } from '../Firebase/utils';
 
 const pages = ['Who are we', 'Purpose', 'About', 'Contact', 'Get Involved'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = ( props ) => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const currentUser = useSelector(selectUser)
+  const [loginText, setLoginText] = useState('Login')
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +38,10 @@ const ResponsiveAppBar = ( props ) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    setLoginText(currentUser ? 'Logout' : 'Login')
+  }, [currentUser])
 
   const theme = createTheme({
       palette:{
@@ -111,8 +119,8 @@ const ResponsiveAppBar = ( props ) => {
                         <MenuItem onClick={() => { props.appBarProps.scrollController(props.appBarProps.getInvolvedRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Get Involved</Typography>
                         </MenuItem>
-                        <MenuItem component='a' href='/login' onClick={() => { handleCloseNavMenu() }}>
-                            <Typography textAlign="center">Login</Typography>
+                        <MenuItem component='a' href='/login' onClick={() => { auth.signOut(); handleCloseNavMenu() }}>
+                            <Typography textAlign="center">{loginText}</Typography>
                         </MenuItem>
                     </Menu>
                 </Box>
@@ -145,7 +153,7 @@ const ResponsiveAppBar = ( props ) => {
 
                 <Box sx={{ flexGrow: 0 }}>
                     <MenuItem>
-                        <Typography component='a' href='/login' textAlign="center" sx={{
+                        <Typography onClick={() => auth.signOut()} component='a' href='/login' textAlign="center" sx={{
                     mr: 2,
                     display: { xs: 'none', md: 'flex' },
                     fontFamily: 'monospace',
@@ -155,7 +163,7 @@ const ResponsiveAppBar = ( props ) => {
                     textDecoration: 'none',
                     border:'3px solid white',
                     px:1,
-                    py:0.5}}>LOGIN</Typography>
+                    py:0.5}}>{loginText.toUpperCase() + ' s'}</Typography>
                     </MenuItem>
                     {/* <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
