@@ -51,10 +51,9 @@ const Login = () => {
 
     const print = async () => {
         try {
-            
-            const {user} = await auth.signInWithEmailAndPassword(email, password)
-            dispatch(emailSignIn({user}))
-            console.log('action dispatched')
+            const user = await auth.signInWithEmailAndPassword(email, password)
+            const user2 = await (await (await handleUserProfile(user)).get()).data()
+            dispatch(emailSignIn(user2))
         }catch(err){
             console.log(err)
             switch(err.code){
@@ -69,8 +68,6 @@ const Login = () => {
                     setError('An Error Occured. Please try again')
             }       
         }
-        
-        
     }
 
     // console.log(currentUser.user.email)

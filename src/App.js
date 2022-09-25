@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Redirect } from 'react-router-dom'
 import './App.css';
 import Header from './Components/Header';
@@ -10,15 +10,26 @@ import GetInvolved from './Sections/Get-Involved';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
 import CreateAccount from './Pages/CreateAccount';
+import { auth } from './Firebase/utils';
+import { useDispatch } from 'react-redux';
+import { emailSignIn } from './Redux/User/user.actions';
 
 
-function App() {
+ const App = () => {
 
     const historyRef = useRef(null)
     const purposeRef = useRef(null)
     const aboutRef = useRef(null)
     const contactRef = useRef(null)
     const getInvolvedRef = useRef(null)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged( user => {
+            dispatch(emailSignIn(user))
+        })
+        return unsubscribe
+    }, [])
 
     const handleHistoryScroll = (reference) => {
 
@@ -26,10 +37,7 @@ function App() {
            top: reference.current.offsetTop,
            behavior: 'smooth'
        })
-    }
-
-    
-   
+    }   
 
   return (
     <div>

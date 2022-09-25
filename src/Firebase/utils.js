@@ -26,8 +26,12 @@ export const handleSignUp = (displayName, email, password, confirmPassword) => {
 }
 
 
-export const handleUserProfile = async({ userAuth, additionalData }) => {
+export const handleUserProfile = async({user: userAuth}) => {
+
+    console.log(userAuth)
+
     if(!userAuth) return
+    
 
     const { uid } = userAuth
 
@@ -46,13 +50,13 @@ export const handleUserProfile = async({ userAuth, additionalData }) => {
                 email,
                 createdDate: timeStamp,
                 userRoles,
-                ...additionalData
+                // ...additionalData
             })
         }catch(err){
             console.log(err)
         }
     }
-    console.log(snapshot)
+    
     return userRef
 }
 
@@ -68,4 +72,4 @@ export const getCurrentUser = () => {
         resolve(userAuth);
       }, reject);
     })
-  }
+}
