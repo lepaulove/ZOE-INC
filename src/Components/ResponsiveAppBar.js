@@ -12,17 +12,23 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { createTheme, ThemeProvider } from '@mui/material';
 import NavButton from './NavButtons';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../State/UserSlice';
 import { auth } from '../Firebase/utils';
+import { useNavigate } from 'react-router-dom';
+
 
 const pages = ['Who are we', 'Purpose', 'About', 'Contact', 'Get Involved'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+const mapState = ({ user }) => ({
+    currentUser: user.currentUser
+})
+
 const ResponsiveAppBar = ( props ) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const currentUser = useSelector(selectUser)
   const [loginText, setLoginText] = useState('Login')
+  const { currentUser } = useSelector(mapState)
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -104,7 +110,7 @@ const ResponsiveAppBar = ( props ) => {
                         display: { xs: 'block', md: 'none' },
                     }}
                     >
-                        <MenuItem component='a' href='/' onClick={() => { props.appBarProps.scrollController(props.appBarProps.historyRef); handleCloseNavMenu()}}>
+                        <MenuItem /*component='a' href='/'*/ onClick={() => { props.appBarProps.scrollController(props.appBarProps.historyRef); handleCloseNavMenu(); navigate('/')}}>
                             <Typography textAlign="center">History</Typography>
                         </MenuItem>
                         <MenuItem  onClick={() => { props.appBarProps.scrollController(props.appBarProps.purposeRef); handleCloseNavMenu()}}>

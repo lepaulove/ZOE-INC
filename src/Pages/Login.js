@@ -4,8 +4,7 @@ import { handleSignUp } from '../Firebase/utils'
 import { createTheme, ThemeProvider } from '@mui/material';
 import { auth, handleUserProfile, getSnapshotFromUserAuth } from '../Firebase/utils';
 import { useSelector, useDispatch } from 'react-redux';
-import { signInSuccess } from '../State/UserSlice';
-import { selectUser } from '../State/UserSlice';
+import { emailSignIn } from '../Redux/User/user.actions';
 
 // const mapState = ({ user }) => ({
 //     currentUser: user.currentUser
@@ -25,7 +24,6 @@ const Login = () => {
     // const auth = getAuth()
     useEffect(() => {
         auth.onAuthStateChanged(user => { setcurrentUser(user) })
-        console.log(currentUser)
 
         // return unsubscribe
     }, [currentUser])
@@ -53,8 +51,10 @@ const Login = () => {
 
     const print = async () => {
         try {
+            
             const {user} = await auth.signInWithEmailAndPassword(email, password)
-            dispatch(signInSuccess({user}))
+            dispatch(emailSignIn({user}))
+            console.log('action dispatched')
         }catch(err){
             console.log(err)
             switch(err.code){
@@ -67,9 +67,7 @@ const Login = () => {
                     break
                 case 'auth/internal-error':
                     setError('An Error Occured. Please try again')
-            }
-                
-                
+            }       
         }
         
         
@@ -103,16 +101,16 @@ const Login = () => {
                                 Need an Accout?
                             </Typography>
                         </Grid>
-                        { currentUser && <Grid item>
+                        {/* { currentUser && <Grid item>
                             <Typography>
                                 {`User Email: ${currentUser.email}`}
                             </Typography>
-                        </Grid>}
+                        </Grid>}*/}
                         { error && <Grid item>
                             <Typography>
                                 {`${error}`}
                             </Typography>
-                        </Grid>}
+                        </Grid>} 
                     </Grid>
                 </Grid>
             </Box>

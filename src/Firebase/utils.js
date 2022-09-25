@@ -60,3 +60,12 @@ export const getSnapshotFromUserAuth = async (user) => {
     const snapshot = (await handleUserProfile({userAuth: user})).get()
     return snapshot
 }
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = auth.onAuthStateChanged(userAuth => {
+        unsubscribe();
+        resolve(userAuth);
+      }, reject);
+    })
+  }
