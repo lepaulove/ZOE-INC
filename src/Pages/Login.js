@@ -5,10 +5,11 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { auth, handleUserProfile, getSnapshotFromUserAuth } from '../Firebase/utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { emailSignIn } from '../Redux/User/user.actions';
+import { useNavigate } from 'react-router-dom';
 
-// const mapState = ({ user }) => ({
-//     currentUser: user.currentUser
-// })
+const mapState = ({ user }) => ({
+    currentUser: user.currentUser
+})
 
 const Login = () => {
 
@@ -16,16 +17,17 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [userAuth, setUserAuth] = useState('')
     const [error, setError] = useState(null)
-    const [currentUser, setcurrentUser] = useState('')
     const dispatch = useDispatch()
+    const [userAuthenticated, setUserAuthenticated] = useState(false)
+    const navigate = useNavigate()
+    const { currentUser } = useSelector(mapState)
     // const  currentUser  = useSelector(state => state.user)
     // let currentUser = useSelector(selectUser)
     // console.log(currentUser)
     // const auth = getAuth()
     useEffect(() => {
-        auth.onAuthStateChanged(user => { setcurrentUser(user) })
-
-        // return unsubscribe
+        currentUser ? navigate('/') : console.log('No User Found')
+        return
     }, [currentUser])
 
     const getEmail = (e) => {
@@ -49,11 +51,12 @@ const Login = () => {
         }
     })
 
-    const print = async () => {
+    const handleLogin = async () => {
         try {
             const user = await auth.signInWithEmailAndPassword(email, password)
-            const user2 = await (await (await handleUserProfile(user)).get()).data()
+            const user2 = await (await (await handleUserProfile({userAuth: user.user})).get()).data()
             dispatch(emailSignIn(user2))
+            setUserAuthenticated(true)
         }catch(err){
             console.log(err)
             switch(err.code){
@@ -63,6 +66,9 @@ const Login = () => {
                 case 'auth/user-not-found':
                 case 'auth/wrong-password':
                     setError('Incorrect Email or Password')
+                    break
+                case 'auth/email-already-in-use':
+                    setError('You already have an account')
                     break
                 case 'auth/internal-error':
                     setError('An Error Occured. Please try again')
@@ -87,16 +93,18 @@ const Login = () => {
                             <TextField fullWidth type='password' label='PASSWORD' value={password} onChange={getPassword}/>
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
-                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={print}>
+                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={handleLogin}>
                                 <Typography>
                                     LOGIN
                                 </Typography>
                             </Button>
                         </Grid>
-                        <Grid item xs={7}>
-                            <Typography component='a' href='/create-account'>
-                                Need an Accout?
-                            </Typography>
+                        <Grid item xs={8.4} md={6.01}>
+                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={() => {navigate('/register')}}>
+                                <Typography sx={{textDecoration: 'none', color:'white'}}>
+                                    Register
+                                </Typography>
+                            </Button>
                         </Grid>
                         {/* { currentUser && <Grid item>
                             <Typography>

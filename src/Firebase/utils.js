@@ -13,27 +13,31 @@ const auth2 = getAuth(app)
 
 export const handleSignUp = (displayName, email, password, confirmPassword) => {
 
+    let user = null
+
     if(password === confirmPassword){
         auth.createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
-            const user = userCredentials.user
-            handleUserProfile({ userAuth: user, additionalData: { displayName }})
+            user = userCredentials
+            handleUserProfile({userAuth: user.user})
         }).catch(error => {console.log(error)})
     }else{
         console.log('Sorry, ' + displayName + '! Passwords Do Not Match.')
     }
     
+    return user
 }
 
 
-export const handleUserProfile = async({user: userAuth}) => {
+export const handleUserProfile = async({userAuth}) => {
 
-    console.log(userAuth)
+    // console.log(userAuth)
 
     if(!userAuth) return
-    
 
     const { uid } = userAuth
+
+    // console.log(`${uid} Storing in firestore database...`)
 
     const userRef = firestore.doc(`users/${uid}`)
 
@@ -56,12 +60,15 @@ export const handleUserProfile = async({user: userAuth}) => {
             console.log(err)
         }
     }
+    // console.log(userRef)
     
     return userRef
 }
 
 export const getSnapshotFromUserAuth = async (user) => {
-    const snapshot = (await handleUserProfile({userAuth: user})).get()
+    // console.log(user)
+    const snapshot = await (await handleUserProfile({userAuth: user})).get()
+    // console.log(snapshot)
     return snapshot
 }
 

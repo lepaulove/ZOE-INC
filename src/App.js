@@ -1,22 +1,24 @@
-import React, { useRef, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Redirect } from 'react-router-dom'
+import React, { useState, useEffect, useRef, useMemo  } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
 import './App.css';
 import Header from './Components/Header';
-import History from './Sections/History'
-import Purpose from './Sections/Purpose'
-import About from './Sections/About'
-import Contact from './Sections/Contact'
-import GetInvolved from './Sections/Get-Involved';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
 import CreateAccount from './Pages/CreateAccount';
-import { auth } from './Firebase/utils';
-import { useDispatch } from 'react-redux';
-import { emailSignIn } from './Redux/User/user.actions';
+import { auth, getSnapshotFromUserAuth } from './Firebase/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { emailSignIn, setUserProfileData } from './Redux/User/user.actions';
+import UserAccount from './Pages/UserAccount';
 
+
+const mapUserState = ({ user }) => ({
+    currentUser: user.currentUser
+})
 
  const App = () => {
 
+    // const [userProfileData, setUserProfileData] = useState(null)
+    // const [currentUser, setCurrentUser] = useState(null)
     const historyRef = useRef(null)
     const purposeRef = useRef(null)
     const aboutRef = useRef(null)
@@ -24,19 +26,32 @@ import { emailSignIn } from './Redux/User/user.actions';
     const getInvolvedRef = useRef(null)
     const dispatch = useDispatch()
 
-    useEffect(() => {
+
+    useEffect( () => {
+
         const unsubscribe = auth.onAuthStateChanged( user => {
+            console.log('App Component Mounting...')
             dispatch(emailSignIn(user))
+            const userData = async () => { const data = await getSnapshotFromUserAuth(user); dispatch(setUserProfileData(data.data())) }
+            userData()
+            // console.log(userProfileData.data())
+            // setCurrentUser(user)
+            
         })
+
         return unsubscribe
     }, [])
 
     const handleHistoryScroll = (reference) => {
 
-       window.scrollTo({
-           top: reference.current.offsetTop,
-           behavior: 'smooth'
-       })
+       try{
+        window.scrollTo({
+            top: reference.current.offsetTop,
+            behavior: 'smooth'
+        })
+       }catch(err){
+
+       }
     }   
 
   return (
@@ -49,11 +64,12 @@ import { emailSignIn } from './Redux/User/user.actions';
             aboutRef={aboutRef}
             contactRef={contactRef}
             getInvolvedRef={getInvolvedRef}
-            />        
+            />       
             <Routes>
                 <Route exact path='/' element={<Home historyRef={historyRef} purposeRef={purposeRef} aboutRef={aboutRef} contactRef={contactRef} getInvolvedRef={getInvolvedRef}/>}/>
                 <Route exact path='/login' element={<Login />}/>
-                <Route exact path='/Create-account' element={<CreateAccount />}/>
+                <Route exact path='/register' element={<CreateAccount />}/>
+                <Route exact path='/my-account' element={<UserAccount />}/>
             </Routes>
         </Router>
     </div>
