@@ -5,6 +5,7 @@ import NavButton from './NavButtons'
 import { auth } from '../Firebase/utils';
 import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
@@ -16,6 +17,7 @@ export default function FullAppBar( props ) {
     const [loginText, setLoginText] = useState('')
     const [path, setPath] = useState('login')
     const { currentUser } = useSelector(mapState)
+    const navigate = useNavigate()
     
       const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -51,6 +53,7 @@ export default function FullAppBar( props ) {
                 <NavButton page={'About'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.aboutRef}/>
                 <NavButton page={'Contact'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.contactRef}/>
                 <NavButton page={'Get Involved'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.getInvolvedRef}/>
+                {currentUser && <NavButton page={'Community Square'} clickHandler={(() => navigate('/superchat'))} />}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
                     <MenuItem>
@@ -66,7 +69,7 @@ export default function FullAppBar( props ) {
                     px:1,
                     py:0.5}}>{loginText.toUpperCase()}</Typography>
                     </MenuItem>
-                    <MenuItem>
+                    {/* <MenuItem>
                         <Typography onClick={() => auth.signOut()} component='a' href='/' textAlign="center" sx={{
                     mr: 2,
                     display: { xs: 'none', md: 'flex' },
@@ -78,7 +81,7 @@ export default function FullAppBar( props ) {
                     border:'3px solid white',
                     px:1,
                     py:0.5}}>LOGOUT</Typography> 
-                    </MenuItem>
+                    </MenuItem> */}
                     <Menu
                     sx={{ mt: '45px' }}
                     id="menu-appbar"

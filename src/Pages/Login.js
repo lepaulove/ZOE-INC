@@ -87,7 +87,7 @@ const Login = () => {
                     </Grid>
                     <Grid item container direction='row' justifyContent='center' spacing={{xs:2}}>
                         <Grid item xs={9} md={6.01}>
-                            <TextField fullWidth label='EMAIL' value={email} onChange={getEmail}/>
+                            <TextField fullWidth label='EMAIL' value={email} onChange={getEmail} />
                         </Grid>
                         <Grid item xs={9} md={6.01}>
                             <TextField fullWidth type='password' label='PASSWORD' value={password} onChange={getPassword}/>

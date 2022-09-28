@@ -5,8 +5,8 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 
 function Header(props) {
   return (
-    <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-between', backgroundColor:'black', height:100, width:'100%'}}>
-        <Paper sx={{display:'flex', alignItems:'center', alignContent:'center', backgroundColor:'black'}}>
+    <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-between', backgroundColor:'#000', height:100, width:'100%'}}>
+        <Paper sx={{display:'flex', alignItems:'center', alignContent:'center', backgroundColor:'#000'}}>
             <div style={{color:'white', fontSize:30, paddingTop:20}}>
                 ZOE INC. & ASSOCIATES
             </div>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Box, Grid, Typography, ThemeProvider, createTheme } from '@mui/material'
+import { Container, Box, Grid, Typography, ThemeProvider, createTheme, Button } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSnapshotFromUserAuth } from '../Firebase/utils'
 import { setUserProfileData } from '../Redux/User/user.actions'
+import { auth } from '../Firebase/utils'
+import { useNavigate } from 'react-router-dom'
 
 
 const mapUserState = ({ user }) => ({
@@ -20,6 +22,7 @@ const UserAccount = () => {
     const [userProfileInfo, setUserProfileInfo] = useState(null)
     const [displayName, setDisplayName] = useState('My Account')
     const dispatch = useDispatch()   
+    const navigate = useNavigate()
 
     // setDisplayName( () => {userProfileInfo.data().displayName ? setDisplayName(userProfileInfo.data().displayName) : currentUser.displayName})   
 
@@ -33,8 +36,12 @@ const UserAccount = () => {
             setDisplayName(userProfileData.displayName)  
     }, [])
 
-    const theme = createTheme({  
-
+    const theme = createTheme({
+        palette:{
+            primary:{
+                main:'#000'
+            }
+        }
     })
 
   return (
@@ -43,6 +50,13 @@ const UserAccount = () => {
             < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', pt: 4, backgroundColor:'transparent'}}>
                 <Grid item>
                     <Typography variant='h3' fontWeight='bold'>{displayName}</Typography>
+                </Grid>
+                <Grid>
+                    <Button  onClick={() => {auth.signOut(); navigate('/login')}} variant='contained' color='primary' size='large'>
+                        <Typography >
+                            LOGOUT
+                        </Typography>
+                    </Button>
                 </Grid>
             </Grid>
         </Box>
