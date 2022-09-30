@@ -54,7 +54,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             const user = await auth.signInWithEmailAndPassword(email, password)
-            const user2 = await (await (await handleUserProfile({userAuth: user.user})).get()).data()
+            const user2 = await (await (await handleUserProfile(user.user)).get()).data()
             dispatch(emailSignIn(user2))
             setUserAuthenticated(true)
         }catch(err){

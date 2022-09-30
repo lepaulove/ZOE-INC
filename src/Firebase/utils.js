@@ -19,7 +19,7 @@ export const handleSignUp = (displayName, email, password, confirmPassword) => {
         auth.createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
             user = userCredentials
-            handleUserProfile({userAuth: user.user})
+            handleUserProfile( user.user, { displayName })
         }).catch(error => {console.log(error)})
     }else{
         console.log('Sorry, ' + displayName + '! Passwords Do Not Match.')
@@ -29,7 +29,7 @@ export const handleSignUp = (displayName, email, password, confirmPassword) => {
 }
 
 
-export const handleUserProfile = async({userAuth}) => {
+export const handleUserProfile = async(userAuth, additionalData) => {
 
     // console.log(userAuth)
 
@@ -54,7 +54,7 @@ export const handleUserProfile = async({userAuth}) => {
                 email,
                 createdDate: timeStamp,
                 userRoles,
-                // ...additionalData
+                ...additionalData
             })
         }catch(err){
             console.log(err)
@@ -67,7 +67,7 @@ export const handleUserProfile = async({userAuth}) => {
 
 export const getSnapshotFromUserAuth = async (user) => {
     // console.log(user)
-    const snapshot = await (await handleUserProfile({userAuth: user})).get()
+    const snapshot = await (await handleUserProfile(user)).get()
     // console.log(snapshot)
     return snapshot
 }
