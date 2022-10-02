@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import History from '../Sections/History'
 import Purpose from '../Sections/Purpose'
 import About from '../Sections/About'

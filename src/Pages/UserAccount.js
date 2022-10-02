@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Box, Grid, Typography, ThemeProvider, createTheme, Button } from '@mui/material'
+import { Box, Grid, Typography, ThemeProvider, createTheme, Button } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import { getSnapshotFromUserAuth } from '../Firebase/utils'
-import { setUserProfileData } from '../Redux/User/user.actions'
 import { auth } from '../Firebase/utils'
 import { useNavigate } from 'react-router-dom'
 
@@ -17,11 +15,8 @@ const mapUserDataState = ({ user }) => ({
 
 const UserAccount = () => {
 
-    const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
-    const [userProfileInfo, setUserProfileInfo] = useState(null)
     const [displayName, setDisplayName] = useState('My Account')
-    const dispatch = useDispatch()   
     const navigate = useNavigate()
 
     // setDisplayName( () => {userProfileInfo.data().displayName ? setDisplayName(userProfileInfo.data().displayName) : currentUser.displayName})   
@@ -30,9 +25,7 @@ const UserAccount = () => {
          
             // const userData = async () => { const data = await getSnapshotFromUserAuth(currentUser); dispatch(setUserProfileData(data)) }
             // userData()
-            setUserProfileInfo(userProfileData)
-            // setDisplayName( () => userProfileInfo ? setDisplayName(userProfileInfo.data().displayName) : currentUser.displayName ) 
-            console.log(userProfileData)
+            // setDisplayName( () => userProfileInfo ? setDisplayName(userProfileInfo.data().displayName) : currentUser.displayName )
             setDisplayName(userProfileData.displayName)  
     }, [])
 

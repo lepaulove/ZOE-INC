@@ -3,12 +3,6 @@ import { Button } from '@mui/material'
 
 const NavButton = (props) => {
     
-    
-    let stuff
-    
-    useEffect(() => {
-        stuff = props
-    }, [stuff])
 
     const { page, clickHandler, reference } = props
 

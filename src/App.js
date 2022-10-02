@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { emailSignIn, setUserProfileData } from './Redux/User/user.actions';
 import UserAccount from './Pages/UserAccount';
 import { SuperChat } from './Pages/SuperChat';
+import ResetPassword from './Pages/ResetPassword'
 
 
 const mapUserState = ({ user }) => ({
@@ -72,6 +73,7 @@ const mapUserState = ({ user }) => ({
                 <Route exact path='/register' element={<CreateAccount />}/>
                 <Route exact path='/my-account' element={<UserAccount />}/>
                 <Route exact path='/superchat' element={<SuperChat />}/>
+                <Route exact path='/reset-password' element={<ResetPassword />}/>
             </Routes>
         </Router>
     </div>

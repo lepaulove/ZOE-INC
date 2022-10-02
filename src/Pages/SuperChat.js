@@ -4,7 +4,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
 import ChatMessage from '../Components/ChatMessage';
 import { useSelector } from 'react-redux';
-import { fontWeight } from '@mui/system';
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -42,7 +41,7 @@ export const SuperChat = (props) => {
                 <Grid item>
                     <h1>Community Square</h1>
                 </Grid>
-                <Paper item container direction='column' spacing={{xs:2}} sx={{backgroundColor: 'gray', width:'80vw', height:'80vh', borderRadius:10, p:6}}>
+                <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{backgroundColor: 'gray', width:'80vw', height:'80vh', borderRadius:10, p:6}}>
                     {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
                     <Grid container item justifyContent='flex-end' >
                         <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>

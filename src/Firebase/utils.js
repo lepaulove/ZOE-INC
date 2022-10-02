@@ -2,30 +2,32 @@ import { firebaseConfig } from "./config";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { getAuth } from 'firebase/auth'
 
 const app = firebase.initializeApp(firebaseConfig)
 
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
-const auth2 = getAuth(app)
 
 
-export const handleSignUp = (displayName, email, password, confirmPassword) => {
+export const handleSignUp = async (displayName, email, password, confirmPassword) => {
 
     let user = null
 
-    if(password === confirmPassword){
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            user = userCredentials
+    try{
+      if(password === confirmPassword){
+        user = await auth.createUserWithEmailAndPassword(email, password)
+        // .then(userCredentials => {
+            // user = userCredentials
             handleUserProfile( user.user, { displayName })
-        }).catch(error => {console.log(error)})
-    }else{
-        console.log('Sorry, ' + displayName + '! Passwords Do Not Match.')
-    }
-    
-    return user
+            return user
+        // }).catch(error => {console.log(error)})
+      }else{
+          throw 'Passwords Do Not Match.'
+      }
+    }catch(err){
+      console.log(err)
+      throw err
+    }  
 }
 
 
@@ -80,3 +82,20 @@ export const getCurrentUser = () => {
       }, reject);
     })
 }
+
+export const handleResetPasswordAPI = (email) => {
+    const config = {
+      url: 'http://localhost:3000/login'
+    };
+  
+    return new Promise((resolve, reject) => {
+      auth.sendPasswordResetEmail(email, config)
+        .then(() => {
+          resolve();
+        })
+        .catch(() => {
+          const err = ['Email not found. Please try again.'];
+          reject(err);
+        });
+    });
+  };
