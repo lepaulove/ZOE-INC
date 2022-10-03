@@ -20,6 +20,8 @@ export const SuperChat = (props) => {
     const { userProfileData } = useSelector(mapUserDataState)
     const messagesRef = firestore.collection('messages')
     const query = messagesRef.orderBy('createdAt').limit(25)
+
+    console.log(messagesRef)
     
 
     const [messages] = useCollectionData(query, {idField: 'id'})

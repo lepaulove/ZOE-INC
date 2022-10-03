@@ -3,6 +3,7 @@ import { Box, Grid, Typography, ThemeProvider, createTheme, Button } from '@mui/
 import { useSelector, useDispatch } from 'react-redux'
 import { auth } from '../Firebase/utils'
 import { useNavigate } from 'react-router-dom'
+import { emailSignIn, setUserProfileData } from '../Redux/User/user.actions'
 
 
 const mapUserState = ({ user }) => ({
@@ -17,6 +18,7 @@ const UserAccount = () => {
 
     const { userProfileData } = useSelector(mapUserDataState)
     const [displayName, setDisplayName] = useState('My Account')
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     // setDisplayName( () => {userProfileInfo.data().displayName ? setDisplayName(userProfileInfo.data().displayName) : currentUser.displayName})   
@@ -37,6 +39,12 @@ const UserAccount = () => {
         }
     })
 
+    const handleUserSignout = () => {
+        auth.signOut()
+        dispatch(setUserProfileData(null))
+        dispatch(emailSignIn(null))
+    }
+
   return (
     <ThemeProvider theme={theme}>
         <Box sx={{backgroundColor:'dodgerblue'}}>
@@ -45,7 +53,7 @@ const UserAccount = () => {
                     <Typography variant='h3' fontWeight='bold'>{displayName}</Typography>
                 </Grid>
                 <Grid>
-                    <Button  onClick={() => {auth.signOut(); navigate('/login')}} variant='contained' color='primary' size='large'>
+                    <Button  onClick={() => {handleUserSignout(); navigate('/login')}} variant='contained' color='primary' size='large'>
                         <Typography >
                             LOGOUT
                         </Typography>

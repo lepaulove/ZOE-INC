@@ -7,8 +7,11 @@ import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 
-const mapState = ({ user }) => ({
+const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
+})
+const mapUserDataState = ({user}) => ({
+    userProfileData: user.userProfileData
 })
 
 export default function FullAppBar( props ) {
@@ -16,7 +19,8 @@ export default function FullAppBar( props ) {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [loginText, setLoginText] = useState('')
     const [path, setPath] = useState('login')
-    const { currentUser } = useSelector(mapState)
+    const { currentUser } = useSelector(mapUserState)
+    const { userProfileData } = useSelector(mapUserDataState)
     const navigate = useNavigate()
     
       const handleCloseUserMenu = () => {
@@ -54,6 +58,7 @@ export default function FullAppBar( props ) {
                 <NavButton page={'Contact'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.contactRef}/>
                 <NavButton page={'Get Involved'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.getInvolvedRef}/>
                 {currentUser && <NavButton page={'Community Square'} clickHandler={(() => navigate('/superchat'))} />}
+                {userProfileData && userProfileData.userRoles[0] === 'admin' && <NavButton page={'Admin'} clickHandler={(() => navigate('/admin'))} />}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
                     <MenuItem>
