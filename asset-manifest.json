@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/css/main.be01daa0.css",
-    "main.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.1e61e386.js",
+    "main.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.5b30560f.js",
     "static/js/787.1a72c009.chunk.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/787.1a72c009.chunk.js",
     "static/media/logo.svg": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/media/logo.b2e5a01e505f739f1484b881277d5186.svg",
     "index.html": "/ZOE-INC-AND-ASSOCIATES-PROJECT/index.html",
     "main.be01daa0.css.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/css/main.be01daa0.css.map",
-    "main.1e61e386.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.1e61e386.js.map",
+    "main.5b30560f.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.5b30560f.js.map",
     "787.1a72c009.chunk.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/787.1a72c009.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.be01daa0.css",
-    "static/js/main.1e61e386.js"
+    "static/js/main.5b30560f.js"
   ]
 }
