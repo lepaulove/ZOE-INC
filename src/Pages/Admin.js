@@ -28,36 +28,12 @@ export default function Admin() {
 
     const fetchAllUsers = async () => {
         const querySnapshot = await getDocs(collection(db, "users"));
-        // querySnapshot.docs.forEach((doc) => { 
-        //     console.log(doc.data().displayName, " => ", doc.data());
-        // })
         setUsers(querySnapshot.docs)
     };
-
-    // 
-    //     return querySnapshot.docs
-    //     
-    //     //   doc.data() is never undefined for query doc snapshots
-    //       
-
-    
-    // console.log(fetchAllUsers())
 
     useEffect(() => {
         fetchAllUsers()
     }, [])
-
-    // {
-    //     "userRoles": [
-    //         "user"
-    //     ],
-    //     "email": "tester@test.com",
-    //     "createdDate": {
-    //         "seconds": 1664129856,
-    //         "nanoseconds": 305000000
-    //     },
-    //     "displayName": "Tester"
-    // }
     
     
 

@@ -38,12 +38,14 @@ export const SuperChat = (props) => {
         setMessage('')
     }
   return (
-     <Box sx={{backgroundColor:'dodgerblue', py:10, pl:10, pr:4, height:'100vh'}}>
+     <Box sx={{backgroundColor:'dodgerblue', py:5, pl:4.5, pr:4, height:'100vh'}}>
             {currentUser ? < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', backgroundColor:'transparent'}}>
                 <Grid item>
-                    <h1>Community Square</h1>
+                    <Typography variant='h5' fontWeight='bold'>
+                        Community Square
+                    </Typography>
                 </Grid>
-                <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{backgroundColor: 'gray', width:'80vw', height:'80vh', borderRadius:10, p:6}}>
+                <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, height:'75vh', borderRadius:10, p:{xs:2, md:6}}}>
                     {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
                     <Grid container item justifyContent='flex-end' >
                         <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>

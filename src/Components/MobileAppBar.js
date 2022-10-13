@@ -13,11 +13,15 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import NavButton from './NavButtons';
 import { useSelector } from 'react-redux';
 import { auth } from '../Firebase/utils';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FullAppBar from './FullAppBar'
 
-const mapState = ({ user }) => ({
+const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
+})
+
+const mapUserDataState = ({user}) => ({
+    userProfileData: user.userProfileData
 })
 
 export default function MobileAppBar(props) {
@@ -26,7 +30,8 @@ export default function MobileAppBar(props) {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [loginText, setLoginText] = useState('Login')
-    const { currentUser } = useSelector(mapState)
+    const { currentUser } = useSelector(mapUserState)
+    const { userProfileData } = useSelector(mapUserDataState)
     const navigate = useNavigate()
   
     const handleOpenNavMenu = (event) => {
@@ -79,24 +84,44 @@ export default function MobileAppBar(props) {
                         display: { xs: 'block', md: 'none' },
                     }}
                     >
-                        <MenuItem /*component='a' href='/'*/ onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.historyRef); handleCloseNavMenu(); navigate('/')}}>
+                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem /*component='a' href='/'*/ onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.historyRef); handleCloseNavMenu(); navigate('/')}}>
                             <Typography textAlign="center">History</Typography>
-                        </MenuItem>
-                        <MenuItem  onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.purposeRef); handleCloseNavMenu()}}>
+                        </MenuItem></Link>
+                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem  onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.purposeRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Purpose</Typography>
-                        </MenuItem>
-                        <MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.aboutRef); handleCloseNavMenu()}}>
+                        </MenuItem></Link>
+                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.aboutRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">About</Typography>
-                        </MenuItem>
-                        <MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.contactRef); handleCloseNavMenu()}}>
+                        </MenuItem></Link>
+                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.contactRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Contact</Typography>
-                        </MenuItem>
-                        <MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.getInvolvedRef); handleCloseNavMenu()}}>
+                        </MenuItem></Link>
+                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.getInvolvedRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Get Involved</Typography>
-                        </MenuItem>
-                        <MenuItem component='a' href='/login' onClick={() => { auth.signOut(); handleCloseNavMenu() }}>
-                            <Typography textAlign="center">{loginText}</Typography>
-                        </MenuItem>
+                        </MenuItem></Link>
+                        {currentUser && 
+                            <Link to='/superchat'><MenuItem onClick={() => {  handleCloseNavMenu() }}>
+                                <Typography textAlign="center">Community Square</Typography>
+                            </MenuItem></Link>
+                        }
+                        {userProfileData && userProfileData.userRoles[0] === 'admin' && 
+                            <Link to='/admin'><MenuItem onClick={() => { handleCloseNavMenu() }}>
+                                <Typography textAlign="center">Admin</Typography>
+                            </MenuItem></Link>
+                        }
+                        {!currentUser ? 
+                            <Link to='/login'>
+                                <MenuItem /*component='a' href='/login'*/ onClick={() => { /*auth.signOut();*/ handleCloseNavMenu() }}>
+                                    <Typography textAlign="center">{loginText}</Typography>
+                                </MenuItem>
+                            </Link> 
+                            : 
+                            <Link to='/my-account'>
+                                <MenuItem /*component='a' href='/login'*/ onClick={() => { /*auth.signOut();*/ handleCloseNavMenu() }}>
+                                    <Typography textAlign="center">{loginText}</Typography>
+                                </MenuItem>
+                            </Link>
+                        }
                     </Menu>
                 </Box>
                 <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />

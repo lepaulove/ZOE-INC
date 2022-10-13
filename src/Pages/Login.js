@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { auth, handleUserProfile } from '../Firebase/utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { emailSignIn } from '../Redux/User/user.actions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
@@ -24,7 +24,7 @@ const Login = () => {
     // console.log(currentUser)
     // const auth = getAuth()
     useEffect(() => {
-        currentUser ? navigate('/') : console.log('No User Found')
+        currentUser ? navigate('/ZOE-INC-AND-ASSOCIATES-PROJECT') : console.log('No User Found')
         return
     }, [currentUser])
 
@@ -71,8 +71,6 @@ const Login = () => {
                 case 'auth/internal-error':
                 default:
                     setEmailError('An Error Occured. Please try again')
-                
-
             }       
         }
     }
@@ -101,15 +99,22 @@ const Login = () => {
                             </Button>
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
-                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={() => {navigate('/register')}}>
-                                <Typography sx={{textDecoration: 'none', color:'white'}}>
-                                    Register
-                                </Typography>
-                            </Button>
+                            <Link to='/register'>
+                                <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} /*</Grid>onClick={() => {navigate('/register')}}*/>
+                                    <Typography sx={{textDecoration: 'none', color:'white'}}>
+                                        Register
+                                    </Typography>
+                                </Button>
+                            </Link>
                             <Grid item xs={7} pt={1} >
-                                <Typography  variant='button' onClick={() => {navigate('/reset-password')}} sx={{fontSize:20, '&:hover':{cursor:'pointer'}}}>
+                                <Link to='/reset-password'>
+                                    <Typography  variant='button' /*onClick={() => {navigate('/reset-password')}}*/ sx={{fontSize:20, '&:hover':{cursor:'pointer'}}}>
+                                        Forgot Password?
+                                    </Typography>
+                                </Link>
+                                {/* <Typography  variant='button' onClick={() => {navigate('/reset-password')}} sx={{fontSize:20, '&:hover':{cursor:'pointer'}}}>
                                     Forgot Password?
-                                </Typography>
+                                </Typography> */}
                             </Grid>
                         </Grid>
                         

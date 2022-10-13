@@ -6,10 +6,12 @@ import { auth } from '../Firebase/utils';
 import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
 })
+
 const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
@@ -61,8 +63,8 @@ export default function FullAppBar( props ) {
                 {userProfileData && userProfileData.userRoles[0] === 'admin' && <NavButton page={'Admin'} clickHandler={(() => navigate('/admin'))} />}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-                    <MenuItem>
-                        <Typography /*onClick={() => auth.signOut()}*/ component='a' href={path} textAlign="center" sx={{
+                    <Link style={{textDecoration:'none'}} to={`/${path}`}><MenuItem>
+                        <Typography /*onClick={() => auth.signOut()}*/  textAlign="center" sx={{
                     mr: 2,
                     display: { xs: 'none', md: 'flex' },
                     fontFamily: 'monospace',
@@ -73,7 +75,7 @@ export default function FullAppBar( props ) {
                     border:'3px solid white',
                     px:1,
                     py:0.5}}>{loginText.toUpperCase()}</Typography>
-                    </MenuItem>
+                    </MenuItem></Link>
                     {/* <MenuItem>
                         <Typography onClick={() => auth.signOut()} component='a' href='/' textAlign="center" sx={{
                     mr: 2,
