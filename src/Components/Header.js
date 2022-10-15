@@ -8,7 +8,7 @@ function Header(props) {
     <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-between', backgroundColor:'#000', height:100, width:'100%'}}>
         <Paper sx={{display:'flex', alignItems:'center', alignContent:'center', backgroundColor:'#000'}}>
             <div style={{color:'white', fontSize:30, paddingTop:20}}>
-                ZOE INC. & ASSOCIATES
+                ZOE INC. & ASSOCIATE
             </div>
         </Paper>
         <ResponsiveAppBar appBarProps={props}/>
