@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box, Button, Paper, Typography, } from '@mui/material';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import { firestore } from '../Firebase/utils';
 
 
 const mapUserState = ({user}) => ({
@@ -33,7 +34,12 @@ export default function Admin() {
 
     useEffect(() => {
         fetchAllUsers()
-    }, [])
+    }, [users])
+
+   const deleteUser = (documentID) => {
+        firestore.collection('users').doc(documentID).delete()
+        fetchAllUsers()
+    }
     
     
 
@@ -70,7 +76,7 @@ export default function Admin() {
                             </TableCell>
                             <TableCell>
                                 <Button>
-                                    <DeleteForeverSharpIcon />
+                                    <DeleteForeverSharpIcon onClick={() => deleteUser(user.id)}/>
                                 </Button>
                             </TableCell>
                         </TableRow>
