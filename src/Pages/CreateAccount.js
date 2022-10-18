@@ -85,6 +85,7 @@ const CreateAccount = () => {
         }
 
         dispatch(emailSignIn(user))
+        navigate('/ZOE-INC-AND-ASSOCIATES-PROJECT')
     }
 
     const theme = createTheme({
