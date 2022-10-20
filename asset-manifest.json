@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ZOE-INC/static/css/main.49fa8e79.css",
-    "main.js": "/ZOE-INC/static/js/main.60a8698e.js",
+    "main.js": "/ZOE-INC/static/js/main.270d3442.js",
     "static/js/512.7bc411ff.chunk.js": "/ZOE-INC/static/js/512.7bc411ff.chunk.js",
     "static/media/logo.svg": "/ZOE-INC/static/media/logo.db36153e906043854e743ee53cf5fff2.svg",
     "index.html": "/ZOE-INC/index.html",
     "main.49fa8e79.css.map": "/ZOE-INC/static/css/main.49fa8e79.css.map",
-    "main.60a8698e.js.map": "/ZOE-INC/static/js/main.60a8698e.js.map",
+    "main.270d3442.js.map": "/ZOE-INC/static/js/main.270d3442.js.map",
     "512.7bc411ff.chunk.js.map": "/ZOE-INC/static/js/512.7bc411ff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.49fa8e79.css",
-    "static/js/main.60a8698e.js"
+    "static/js/main.270d3442.js"
   ]
 }
