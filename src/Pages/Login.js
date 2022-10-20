@@ -24,7 +24,7 @@ const Login = () => {
     // console.log(currentUser)
     // const auth = getAuth()
     useEffect(() => {
-        currentUser ? navigate('/ZOE-INC-AND-ASSOCIATES-PROJECT') : console.log('No User Found')
+        currentUser ? navigate('/ZOE-INC') : console.log('No User Found')
         return
     }, [currentUser])
 

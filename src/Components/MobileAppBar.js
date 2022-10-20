@@ -84,19 +84,19 @@ export default function MobileAppBar(props) {
                         display: { xs: 'block', md: 'none' },
                     }}
                     >
-                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem /*component='a' href='/'*/ onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.historyRef); handleCloseNavMenu(); navigate('/')}}>
+                        <Link to='ZOE-INC'><MenuItem /*component='a' href='/'*/ onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.historyRef); handleCloseNavMenu(); navigate('/')}}>
                             <Typography textAlign="center">History</Typography>
                         </MenuItem></Link>
-                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem  onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.purposeRef); handleCloseNavMenu()}}>
+                        <Link to='ZOE-INC'><MenuItem  onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.purposeRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Purpose</Typography>
                         </MenuItem></Link>
-                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.aboutRef); handleCloseNavMenu()}}>
+                        <Link to='ZOE-INC'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.aboutRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">About</Typography>
                         </MenuItem></Link>
-                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.contactRef); handleCloseNavMenu()}}>
+                        <Link to='ZOE-INC'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.contactRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Contact</Typography>
                         </MenuItem></Link>
-                        <Link to='ZOE-INC-AND-ASSOCIATES-PROJECT'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.getInvolvedRef); handleCloseNavMenu()}}>
+                        <Link to='ZOE-INC'><MenuItem onClick={() => { props.props.appBarProps.scrollController(props.props.appBarProps.getInvolvedRef); handleCloseNavMenu()}}>
                             <Typography textAlign="center">Get Involved</Typography>
                         </MenuItem></Link>
                         {currentUser && 
