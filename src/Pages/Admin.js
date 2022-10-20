@@ -40,7 +40,7 @@ export default function Admin() {
   return (
     // <div style={{paddingTop:50}}>{userProfileData.userRoles[0] === 'user' ? 'YOU ARE NOT AN ADMIN' : 'WELCOME ADMIN'}</div>
     <Box sx={{pt: 10, backgroundColor:'dodgerblue', height:'100vh'}}>
-        {userProfileData.userRoles[0] === 'admin' ? <TableContainer component={Paper} sx={{width:'100%'}}>
+        { userProfileData && userProfileData.userRoles[0] === 'admin' ? <TableContainer component={Paper} sx={{width:'100%'}}>
             <Table sx={{ minWidth: 650, backgroundColor:'dodgerblue'}} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
