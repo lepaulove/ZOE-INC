@@ -79,7 +79,7 @@ export default function Admin() {
                     {users.map((user, index) => {
                         const date = new Date(user.data().createdDate.seconds * 1000)
                         return(
-                        <TableRow key={index}>
+                        <TableRow key={index}  sx={{ "&:hover":{color:'#0FF', backgroundColor:'#555'}}}>
                             <TableCell>
                                 <Typography color='yellow'>{user.data().displayName ? user.data().displayName : 'NO NAME WAS ENTERED'}</Typography>
                             </TableCell>
@@ -93,7 +93,7 @@ export default function Admin() {
                                 <Typography color='yellow'>{date.toDateString()}</Typography>
                             </TableCell>
                             <TableCell>
-                                <DeleteForeverSharpIcon onClick={() => {setSelectedValue(user); handleClickOpen(user.id)}}/>
+                                <DeleteForeverSharpIcon color='default' size='large' sx={{ "&:hover":{color:'#F00', backgroundColor:'#555', cursor:'pointer'}}}  onClick={() => {setSelectedValue(user); handleClickOpen(user.id)}}/>
                             </TableCell>
                         </TableRow>
                         )

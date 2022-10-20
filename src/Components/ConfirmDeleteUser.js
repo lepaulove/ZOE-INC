@@ -5,6 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { firestore } from '../Firebase/utils';
+
 
 export default function ConfirmDeleteUser(props) {
     const { onClose, selectedValue, open } = props;
@@ -22,8 +24,20 @@ export default function ConfirmDeleteUser(props) {
     //   setDisplayName(user.data().displayName)
     // }, [])
 
+  const deleteUser = (documentID) => {
+    alert(`user with ID ${documentID} deleted`)
+    firestore.collection('users').doc(documentID).delete()
+  }
+
+  const handleDeleteClose = () => {
+    // if(user)
+    deleteUser(selectedValue.id) 
+    
+    onClose()
+  };
+
   const handleClose = () => {
-    onClose(selectedValue)
+    onClose()
   };
 
   return (
@@ -47,7 +61,7 @@ export default function ConfirmDeleteUser(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Delete</Button>
+          <Button onClick={handleDeleteClose}>Delete</Button>
           <Button onClick={handleClose} autoFocus>
             Cancel
           </Button>

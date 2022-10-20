@@ -11,7 +11,7 @@ const NavButton = (props) => {
     <Button
         key={page}
         onClick={() => clickHandler(reference)}
-        sx={{ my: 2, mx: 1, color: 'white', display: 'block', "&:hover":{color:'#0FF'} }}
+        sx={{ my: 2, mx: 1, color: 'white', display: 'block', '&:hover':{color:'#0FF', cursor:'pointer'} }}
     >
         {page}
     </Button>
