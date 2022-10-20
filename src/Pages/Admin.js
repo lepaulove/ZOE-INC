@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box, Button, Paper, Typography, } from '@mui/material';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import { firestore } from '../Firebase/utils';
+import ConfirmDeleteUser from '../Components/ConfirmDeleteUser';
 
 
 const mapUserState = ({user}) => ({
@@ -24,16 +26,38 @@ export default function Admin() {
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
     const [users, setUsers] = useState([])
+    const [open, setOpen] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState();
+    const [selectedValue2, setSelectedValue2] = React.useState();
     const db = getFirestore()
 
     const fetchAllUsers = async () => {
-        const querySnapshot = await getDocs(collection(db, "users"));
+        const querySnapshot = await getDocs(collection(getFirestore(), "users"));
         setUsers(querySnapshot.docs)
     };
 
     useEffect(() => {
         fetchAllUsers()
     }, [])
+
+   const deleteUser = (documentID) => {
+        firestore.collection('users').doc(documentID).delete()
+        fetchAllUsers()
+    }
+
+    const handleClickOpen = (id) => {
+        // if(id === selectedValue2){
+            setOpen(true);
+            console.log(`Deleting User ${id}`)
+        // }
+            
+        
+      };
+    
+      const handleClose = (value) => {
+        setOpen(false);
+        setSelectedValue(value);
+      };
     
     
 
@@ -69,9 +93,7 @@ export default function Admin() {
                                 <Typography color='yellow'>{date.toDateString()}</Typography>
                             </TableCell>
                             <TableCell>
-                                <Button>
-                                    <DeleteForeverSharpIcon />
-                                </Button>
+                                <DeleteForeverSharpIcon onClick={() => {setSelectedValue(user); handleClickOpen(user.id)}}/>
                             </TableCell>
                         </TableRow>
                         )
@@ -79,6 +101,11 @@ export default function Admin() {
                 </TableBody>
             </Table>
         </TableContainer>  : <Typography>You do not have the right privalages to view this page</Typography>}
+        {selectedValue ? <ConfirmDeleteUser
+                selectedValue={selectedValue}
+                open={open}
+                onClose={handleClose}
+            /> : console.log(selectedValue)}
     </Box>
   )
 }
