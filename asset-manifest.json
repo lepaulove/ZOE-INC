@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/css/main.be01daa0.css",
-    "main.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.53cb9efc.js",
-    "static/js/787.1a72c009.chunk.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/787.1a72c009.chunk.js",
+    "main.css": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/css/main.49fa8e79.css",
+    "main.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.fd18dc6a.js",
+    "static/js/512.7bc411ff.chunk.js": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/512.7bc411ff.chunk.js",
     "static/media/logo.svg": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/media/logo.db36153e906043854e743ee53cf5fff2.svg",
     "index.html": "/ZOE-INC-AND-ASSOCIATES-PROJECT/index.html",
-    "main.be01daa0.css.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/css/main.be01daa0.css.map",
-    "main.53cb9efc.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.53cb9efc.js.map",
-    "787.1a72c009.chunk.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/787.1a72c009.chunk.js.map"
+    "main.49fa8e79.css.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/css/main.49fa8e79.css.map",
+    "main.fd18dc6a.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/main.fd18dc6a.js.map",
+    "512.7bc411ff.chunk.js.map": "/ZOE-INC-AND-ASSOCIATES-PROJECT/static/js/512.7bc411ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.be01daa0.css",
-    "static/js/main.53cb9efc.js"
+    "static/css/main.49fa8e79.css",
+    "static/js/main.fd18dc6a.js"
   ]
 }
