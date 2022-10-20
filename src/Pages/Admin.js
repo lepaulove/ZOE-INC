@@ -7,10 +7,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Box, Button, Paper, Typography, } from '@mui/material';
+import { Box, Button, Paper, Typography, InputLabel, MenuItem, FormControl } from '@mui/material';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { firestore } from '../Firebase/utils';
 import ConfirmDeleteUser from '../Components/ConfirmDeleteUser';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 const mapUserState = ({user}) => ({
@@ -87,7 +88,8 @@ export default function Admin() {
                                 <Typography color='yellow'>{user.data().email}</Typography>
                             </TableCell>
                             <TableCell>
-                                <Typography color='yellow'>{user.data().userRoles[0]}</Typography>
+                                {/* <Typography color='yellow'>{user.data().userRoles[0]}</Typography> */}
+                                <BasicSelect role={user.data().userRoles[0]} documentID={user.id}/>
                             </TableCell>
                             <TableCell>
                                 <Typography color='yellow'>{date.toDateString()}</Typography>
@@ -109,6 +111,43 @@ export default function Admin() {
     </Box>
   )
 }
+
+function BasicSelect(props) {
+    const [role, setRole] = React.useState('');
+  
+    const handleChange = (e) => {
+        firestore.collection('users').doc(props.documentID).update({userRoles: [`${e.target.value}`]})
+        console.log(e.target.value)
+      setRole(e.target.value);
+    };
+
+    useEffect(() => {
+        setRole(props.role)
+    }, [])
+  
+    return (
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Role</InputLabel>
+          <Select
+            labelId="simple-select-label"
+            id="simple-select"
+            value={role}
+            label="Age"
+            onChange={handleChange}
+            size='small'
+            sx={{color:'yellow'}}
+          >
+            <MenuItem value={'superAdmin'}>Super Admin</MenuItem>
+            <MenuItem value={'admin'}>Admin</MenuItem>
+            <MenuItem value={'student'}>Student</MenuItem>
+            <MenuItem value={'stakeHolder'}>StakeHolder</MenuItem>
+            <MenuItem value={'user'}>User</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+    );
+  }
 
 {/* <TableContainer component={Paper} sx={{width:'100%'}}>
             <Table sx={{ minWidth: 650, backgroundColor:'dodgerblue'}} size="small" aria-label="a dense table">
