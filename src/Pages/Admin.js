@@ -128,7 +128,7 @@ function BasicSelect(props) {
     return (
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Role</InputLabel>
+          <InputLabel id="select-label">Role</InputLabel>
           <Select
             labelId="simple-select-label"
             id="simple-select"
