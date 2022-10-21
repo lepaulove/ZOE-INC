@@ -12,6 +12,7 @@ import UserAccount from './Pages/UserAccount';
 import { SuperChat } from './Pages/SuperChat';
 import ResetPassword from './Pages/ResetPassword'
 import Admin from './Pages/Admin';
+import Resources from './Pages/Resources';
 
 
 const mapUserState = ({ user }) => ({
@@ -76,6 +77,7 @@ const mapUserState = ({ user }) => ({
                 <Route exact path='/superchat' element={<SuperChat />}/>
                 <Route exact path='/reset-password' element={<ResetPassword />}/>
                 <Route exact path='/admin' element={<Admin />} />
+                <Route exact path='resources' element={<Resources />} />
             </Routes>
         </Router>
     </div>

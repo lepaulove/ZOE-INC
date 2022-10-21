@@ -41,7 +41,7 @@ export default function FullAppBar( props ) {
                 variant="h6"
                 noWrap
                 component="a"
-                href="/"
+                href="/ZOE-INC"
                 sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -59,6 +59,7 @@ export default function FullAppBar( props ) {
                 <NavButton page={'About'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.aboutRef}/>
                 <NavButton page={'Contact'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.contactRef}/>
                 <NavButton page={'Get Involved'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.getInvolvedRef}/>
+                <NavButton page={'Rources'} clickHandler={() => navigate('/resources')} reference={props.props.appBarProps.getInvolvedRef}/>
                 {currentUser && <NavButton page={'Community Square'} clickHandler={(() => navigate('/superchat'))} />}
                 {userProfileData && userProfileData.userRoles[0] === 'admin' && <NavButton page={'Admin'} clickHandler={(() => navigate('/admin'))} />}
             </Box>

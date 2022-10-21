@@ -89,9 +89,10 @@ export default function MobileAppBar(props) {
                         }}
                     >
                         <Box sx={{display:'flex', alignItems:'center', justifyContent:'center', pt:4}}>
-                            <Divider />
+                            
                             <Typography variant='h3' color='dodgerblue' fontWeight='bold'>MENU</Typography>
                         </Box>
+                        <Divider sx={{backgroundColor:'dodgerblue'}} variant='middle'/>
                         <List>
                             <Link to='/ZOE-INC' style={{textDecoration: 'none'}}>
                                 <ListItem>
@@ -100,10 +101,10 @@ export default function MobileAppBar(props) {
                                     </ListItemButton>
                                 </ListItem>
                             </Link>
-                            <Link to='/ZOE-INC'style={{textDecoration: 'none'}}>
+                            <Link to='/resources'style={{textDecoration: 'none'}}>
                                 <ListItem>
                                     <ListItemButton onClick={toggleDrawer}>
-                                        <Typography sx={{color:'white'}}>HOME</Typography>
+                                        <Typography sx={{color:'white'}}>RESOURCES</Typography>
                                     </ListItemButton>
                                 </ListItem>
                             </Link>
