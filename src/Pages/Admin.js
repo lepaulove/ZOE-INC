@@ -12,6 +12,8 @@ import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import { firestore } from '../Firebase/utils';
 import ConfirmDeleteUser from '../Components/ConfirmDeleteUser';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { styled } from '@mui/material/styles';
+import AddResource from '../Components/AddResource';
 
 
 const mapUserState = ({user}) => ({
@@ -27,7 +29,8 @@ export default function Admin() {
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
     const [users, setUsers] = useState([])
-    const [open, setOpen] = React.useState(false);
+    const [userDeleteOpen, setUserDeleteOpen] = React.useState(false);
+    const [addResourceOpen, setAddResourceOpen] = useState(false)
     const [selectedValue, setSelectedValue] = React.useState();
     const [selectedValue2, setSelectedValue2] = React.useState();
     const db = getFirestore()
@@ -41,30 +44,39 @@ export default function Admin() {
         fetchAllUsers()
     }, [])
 
-   const deleteUser = (documentID) => {
-        firestore.collection('users').doc(documentID).delete()
-        fetchAllUsers()
-    }
-
-    const handleClickOpen = (id) => {
+    const handleUserDeleteClickOpen = id => {
         // if(id === selectedValue2){
-            setOpen(true);
+            setUserDeleteOpen(true);
             console.log(`Deleting User ${id}`)
         // }
-            
-        
       };
     
-      const handleClose = (value) => {
-        setOpen(false);
+      const handleAddResourceClickOpen = () => {
+        setAddResourceOpen(true)
+      }
+    
+      const handleUserDeleteClose = value => {
+        setUserDeleteOpen(false);
         setSelectedValue(value);
       };
+
+      const handleAddResourceClose = () => {
+        setAddResourceOpen(false)
+      }
+
+      const BootstrapButton = styled(Button)({
+        backgroundColor: '#000',
+        marginLeft: 40
+      })
     
     
 
   return (
     // <div style={{paddingTop:50}}>{userProfileData.userRoles[0] === 'user' ? 'YOU ARE NOT AN ADMIN' : 'WELCOME ADMIN'}</div>
     <Box sx={{pt: 10, backgroundColor:'dodgerblue', height:'100vh'}}>
+        <BootstrapButton variant='contained' onClick={handleAddResourceClickOpen}>
+            Add Resource
+        </BootstrapButton>
         { userProfileData && userProfileData.userRoles[0] === 'admin' ? <TableContainer component={Paper} sx={{width:'100%'}}>
             <Table sx={{ minWidth: 650, backgroundColor:'dodgerblue'}} size="small" aria-label="a dense table">
                 <TableHead>
@@ -95,7 +107,7 @@ export default function Admin() {
                                 <Typography color='yellow'>{date.toDateString()}</Typography>
                             </TableCell>
                             <TableCell>
-                                <DeleteForeverSharpIcon color='default' size='large' sx={{ "&:hover":{color:'#F00', backgroundColor:'#555', cursor:'pointer'}}}  onClick={() => {setSelectedValue(user); handleClickOpen(user.id)}}/>
+                                <DeleteForeverSharpIcon color='default' size='large' sx={{ "&:hover":{color:'#F00', backgroundColor:'#555', cursor:'pointer'}}}  onClick={() => {setSelectedValue(user); handleUserDeleteClickOpen(user.id)}}/>
                             </TableCell>
                         </TableRow>
                         )
@@ -105,9 +117,13 @@ export default function Admin() {
         </TableContainer>  : <Typography>You do not have the right privalages to view this page</Typography>}
         {selectedValue ? <ConfirmDeleteUser
                 selectedValue={selectedValue}
-                open={open}
-                onClose={handleClose}
+                open={userDeleteOpen}
+                onClose={handleUserDeleteClose}
             /> : console.log(selectedValue)}
+        <AddResource 
+            open={addResourceOpen}
+            onClose={handleAddResourceClose}
+        />
     </Box>
   )
 }

@@ -28,7 +28,7 @@ export default function ChatMessage(props) {
       {/* <div style={{ display:'flex', flexdirection:'column', backgroundColor:'white', marginTop:8, marginBottom:8, borderRadius:8, padding:6, border:'3px solid black'}}> */}
         {/* <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} /> */}
         <Grid container justifyContent={flex}>
-          <Grid flexDirection='column' backgroundColor='white' sx={{my: 1, borderRadius: 2, padding: .5, border:'3px solid black', width: '75%', }}>
+          <Grid flexDirection='column' backgroundColor='white' sx={{my: .3, borderRadius: 2, padding: .5, border:'3px solid black', width: '75%', }}>
             <Grid container justifyContent='space-between'>
               <Grid item>
                 <Typography fontSize={12} fontWeight='bold'>{userName + ':' + " "}</Typography>
