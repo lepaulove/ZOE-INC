@@ -13,7 +13,7 @@ import { firestore } from '../Firebase/utils';
 import ConfirmDeleteUser from '../Components/ConfirmDeleteUser';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
-import AddResource from '../Components/AddResource';
+import AddResourceModal from '../Components/AddResourceModal';
 
 
 const mapUserState = ({user}) => ({
@@ -30,7 +30,7 @@ export default function Admin() {
     const { userProfileData } = useSelector(mapUserDataState)
     const [users, setUsers] = useState([])
     const [userDeleteOpen, setUserDeleteOpen] = React.useState(false);
-    const [addResourceOpen, setAddResourceOpen] = useState(false)
+    const [AddResourceModalOpen, setAddResourceModalOpen] = useState(false)
     const [selectedValue, setSelectedValue] = React.useState();
     const [selectedValue2, setSelectedValue2] = React.useState();
     const db = getFirestore()
@@ -51,8 +51,8 @@ export default function Admin() {
         // }
       };
     
-      const handleAddResourceClickOpen = () => {
-        setAddResourceOpen(true)
+      const handleAddResourceModalClickOpen = () => {
+        setAddResourceModalOpen(true)
       }
     
       const handleUserDeleteClose = value => {
@@ -60,8 +60,8 @@ export default function Admin() {
         setSelectedValue(value);
       };
 
-      const handleAddResourceClose = () => {
-        setAddResourceOpen(false)
+      const handleAddResourceModalClose = () => {
+        setAddResourceModalOpen(false)
       }
 
       const BootstrapButton = styled(Button)({
@@ -74,7 +74,7 @@ export default function Admin() {
   return (
     // <div style={{paddingTop:50}}>{userProfileData.userRoles[0] === 'user' ? 'YOU ARE NOT AN ADMIN' : 'WELCOME ADMIN'}</div>
     <Box sx={{pt: 10, backgroundColor:'dodgerblue', height:'100vh'}}>
-        <BootstrapButton variant='contained' onClick={handleAddResourceClickOpen}>
+        <BootstrapButton variant='contained' onClick={handleAddResourceModalClickOpen}>
             Add Resource
         </BootstrapButton>
         { userProfileData && userProfileData.userRoles[0] === 'admin' ? <TableContainer component={Paper} sx={{width:'100%'}}>
@@ -120,9 +120,9 @@ export default function Admin() {
                 open={userDeleteOpen}
                 onClose={handleUserDeleteClose}
             /> : console.log(selectedValue)}
-        <AddResource 
-            open={addResourceOpen}
-            onClose={handleAddResourceClose}
+        <AddResourceModal 
+            open={AddResourceModalOpen}
+            onClose={handleAddResourceModalClose}
         />
     </Box>
   )

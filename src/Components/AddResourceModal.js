@@ -5,12 +5,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField, Grid } from '@mui/material';
 import { firestore } from '../Firebase/utils';
 
 
-export default function AddResource(props) {
+export default function AddResourceModal(props) {
     const { open, onClose } = props;
+    
+    const [category, setCategory] = useState('')
+    const [focus, setFocus] = useState('')
+    const [contactType, setContactType] = useState('')
+    const [contactInfo, setContactInfo] = useState('')
+    const [details, setDetails] = useState('')
 //   const [open, setOpen] = React.useState(false);
 
 //   const handleClickOpen = () => {
@@ -25,10 +36,6 @@ export default function AddResource(props) {
     //   setDisplayName(user.data().displayName)
     // }, [])
 
-  const deleteUser = (documentID) => {
-    alert(`user with ID ${documentID} deleted`)
-    firestore.collection('users').doc(documentID).delete()
-  }
 
   const handleSendClose = () => {
 //     // if(user)
@@ -66,8 +73,13 @@ export default function AddResource(props) {
                     <Grid item xs={6}>
                         <TextField label='Focus' fullWidth/>
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField label='Format' fullWidth/>
+                    <Grid item container rowSpacing={1.5}>
+                      <Grid item xs={12}>
+                          <BasicSelect />
+                      </Grid>
+                      <Grid item xs={12}>
+                          <TextField label='Contact Info' fullWidth/>
+                      </Grid>
                     </Grid>
                 </Grid>
                 <Grid container item>
@@ -88,3 +100,30 @@ export default function AddResource(props) {
     </div>
   );
 }
+
+function BasicSelect() {
+    const [contactType, setContactType] = useState('')
+    const contactTypes = ['Hotline', 'Chat', 'Website', 'Text', 'App', 'Online Forum', 'Online Meetings', 'Local Meetings', 'Help Line']
+  
+    const handleChange = (e) => {
+      setContactType(e);
+    };
+  
+    return (
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <InputLabel id="simple-select-label">Contact Type</InputLabel>
+          <Select
+            labelId="simple-select-label"
+            id="simple-select"
+            value={contactType}
+            label="Contact Type"
+            onChange={handleChange}
+          >{contactTypes.map((item, index) => {
+            return (<MenuItem key={index} value={item}>{item}</MenuItem>)
+          })}
+          </Select>
+        </FormControl>
+      </Box>
+    );
+  }
