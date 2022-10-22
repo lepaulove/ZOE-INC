@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -19,6 +20,14 @@ const BootstrapButton = styled(Button)({
   marginLeft: 40
 })
 
+const mapUserState = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
+const mapUserDataState = ({user}) => ({
+  userProfileData: user.userProfileData
+})
+
 export default function AddResourceModal(props) {
     const { open, onClose } = props;
     
@@ -30,6 +39,9 @@ export default function AddResourceModal(props) {
     const [selectedContactTypes, setSelectedContactTypes] = useState([])
     const contactTypes = ['Hotline', 'Warm Line', 'Chat', 'Website', 'Text', 'App', 'Online Forum', 'Online Meetings', 'Online Support Groups', 'Local Meetings', 'Help Line']
     const categories = ['Crisis & Warm Support', 'Covid-19', 'Domestic Violence', 'Sexual Assault', 'LGBTQ+', 'Substance Abuse', 'Veterans', 'Families', 'EDOs', 'Necessities', 'Other']
+    const communityReseourceRef = firestore.collection('communityResources')
+    const { currentUser } = useSelector(mapUserState)
+    const { userProfileData } = useSelector(mapUserDataState)
 
     const handleCategoryChange = e => {
       setCategory(e.target.value)
@@ -67,10 +79,21 @@ export default function AddResourceModal(props) {
       console.log(selectedContactTypes)
     }
   
-  const handleSendClose = () => {
+  const handleSendClose = async () => {
 //     // if(user)
 //     deleteUser(selectedValue.id)
-    console.log(`Category: ${category}\nFocus: ${focus}\nContact Type: ${contactType}\nContact Info: ${contactInfo}\nDetails: ${details}\n`)
+    const uid = currentUser.uid
+    const userName = userProfileData.displayName
+    await communityReseourceRef.add({
+      category: category,
+      focus: focus,
+      details: details,
+      contacts: selectedContactTypes,
+      createdDate: new Date(),
+      createdBy: userName,
+      uid
+    })
+    console.log(`Category: ${category}\nFocus: ${focus}\nDetails: ${details}\nConatct:${selectedContactTypes}`)
     resetState()
     
     onClose()
