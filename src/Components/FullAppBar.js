@@ -54,17 +54,18 @@ export default function FullAppBar( props ) {
                 LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                <NavButton page={'Who Are We'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.historyRef}/>
+                {/* <NavButton page={'Who Are We'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.historyRef}/>
                 <NavButton page={'Purpose'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.purposeRef}/>
                 <NavButton page={'About'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.aboutRef}/>
                 <NavButton page={'Contact'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.contactRef}/>
-                <NavButton page={'Get Involved'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.getInvolvedRef}/>
+                <NavButton page={'Get Involved'} clickHandler={props.props.appBarProps.scrollController} reference={props.props.appBarProps.getInvolvedRef}/> */}
+                <NavButton page={'Home'} clickHandler={() => navigate('/ZOE-INC')} reference={props.props.appBarProps.getInvolvedRef}/>
                 <NavButton page={'Rources'} clickHandler={() => navigate('/resources')} reference={props.props.appBarProps.getInvolvedRef}/>
                 {currentUser && <NavButton page={'Community Square'} clickHandler={(() => navigate('/superchat'))} />}
                 {userProfileData && userProfileData.userRoles[0] === 'admin' && <NavButton page={'Admin'} clickHandler={(() => navigate('/admin'))} />}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-                    <Link style={{textDecoration:'none'}} to={`/${path}`}><MenuItem>
+                    <Link style={{textDecoration:'none', color:'white'}} to={`/${path}`}><MenuItem>
                         <Typography /*onClick={() => auth.signOut()}*/  textAlign="center" sx={{
                     mr: 2,
                     display: { xs: 'none', md: 'flex' },

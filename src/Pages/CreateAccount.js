@@ -22,7 +22,7 @@ const CreateAccount = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        userAuthenticated ? navigate('/') : console.log('User Not Found')
+        userAuthenticated ? navigate('/ZOE-INC') : console.log('User Not Found')
     }, [userAuthenticated])
 
     const getName = event =>{
@@ -83,8 +83,8 @@ const CreateAccount = () => {
                 }
             return
         }
-
         dispatch(emailSignIn(user))
+        setUserAuthenticated(true)
     }
 
     const theme = createTheme({

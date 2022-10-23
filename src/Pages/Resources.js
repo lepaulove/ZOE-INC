@@ -41,7 +41,7 @@ export default function Resources() {
                         {resources.map((item, index) => {
                             console.log(item.data())
                             return(
-                                <Grid item>
+                                <Grid item key={index}>
                                     <Card raised sx={{ maxWidth: 345, height:'100%', backgroundColor:'black', color:'white' }}>
                                         {/* <CardMedia
                                             component="img"
