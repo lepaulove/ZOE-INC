@@ -10,6 +10,8 @@ const NavButton = (props) => {
   return (
     <Button
         key={page}
+        component={props.componentType}
+        href={props.redirect}
         onClick={() => clickHandler(reference)}
         sx={{ my: 2, mx: 1, color: 'white', display: 'block', '&:hover':{color:'#0FF', cursor:'pointer'} }}
     >

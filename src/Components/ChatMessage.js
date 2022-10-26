@@ -12,14 +12,16 @@ export default function ChatMessage(props) {
     // const { text, uid, photoURL } = props.message;
     const { text, uid, userName, createdAt } = props.message;
     const { currentUser } = useSelector(mapState)
+    const [user, setUser] = useState(currentUser)
     const [flex, setFlex] = useState('flex-start')
     const date = new Date(createdAt.seconds * 1000)
 
     useEffect(() => {
-      console.log(uid)
-      setFlex(uid === currentUser.uid ? 'flex-end' : 'flex-start')
+      // console.log(uid)
+      setFlex(uid === user.uid ? 'flex-end' : 'flex-start')
+      console.log(`UID: ${uid} Current User ID: ${user.uid}`)
       // console.log(`${uid}: ${flex}`)
-    }, [flex])
+    }, [user])
 
   
     // const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
