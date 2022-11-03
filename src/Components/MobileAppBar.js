@@ -112,7 +112,16 @@ export default function MobileAppBar(props) {
                             <Link to='/superchat'style={{textDecoration: 'none'}}>
                                 <ListItem>
                                     <ListItemButton onClick={toggleDrawer}>
-                                        <Typography sx={{color:'white'}}>SUPER-CHAT</Typography>
+                                        <Typography sx={{color:'white'}}>COMMUNITY SQUARE</Typography>
+                                    </ListItemButton>
+                                </ListItem>
+                            </Link>
+                            }
+                            {currentUser && 
+                            <Link to='/private-chat'style={{textDecoration: 'none'}}>
+                                <ListItem>
+                                    <ListItemButton onClick={toggleDrawer}>
+                                        <Typography sx={{color:'white'}}>PRIVATE CHAT</Typography>
                                     </ListItemButton>
                                 </ListItem>
                             </Link>

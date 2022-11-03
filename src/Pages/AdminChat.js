@@ -14,7 +14,6 @@ import ConfirmDeleteUser from '../Components/ConfirmDeleteUser';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 import AddResourceModal from '../Components/AddResourceModal';
-import { useNavigate } from 'react-router-dom';
 
 
 const mapUserState = ({user}) => ({
@@ -25,7 +24,7 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
-export default function Admin() {
+export default function AdminChat() {
 
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
@@ -34,7 +33,6 @@ export default function Admin() {
     const [AddResourceModalOpen, setAddResourceModalOpen] = useState(false)
     const [selectedValue, setSelectedValue] = React.useState();
     const [selectedValue2, setSelectedValue2] = React.useState();
-    const navigate = useNavigate()
     const db = getFirestore()
 
     const fetchAllUsers = async () => {
@@ -85,9 +83,8 @@ export default function Admin() {
                         <TableCell><Typography color='white' fontWeight='bold'>Name</Typography></TableCell>
                         <TableCell><Typography color='white' fontWeight='bold'>Email</Typography></TableCell>
                         <TableCell><Typography color='white' fontWeight='bold'></Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>User Role</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Date Created</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Delete</Typography></TableCell>
+                        {/* <TableCell><Typography color='white' fontWeight='bold'>Date Created</Typography></TableCell>
+                        <TableCell><Typography color='white' fontWeight='bold'>Delete</Typography></TableCell> */}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -102,18 +99,16 @@ export default function Admin() {
                                 <Typography color='yellow'>{user.data().email}</Typography>
                             </TableCell>
                             <TableCell>
-                                <BootstrapButton onClick={() => {navigate('/private-chat')}}>OPEN CHAT</BootstrapButton>
-                            </TableCell>
-                            <TableCell>
+                                <BootstrapButton>Open Chat</BootstrapButton>
                                 {/* <Typography color='yellow'>{user.data().userRoles[0]}</Typography> */}
-                                <BasicSelect role={user.data().userRoles[0]} documentID={user.id}/>
+                                {/* <BasicSelect role={user.data().userRoles[0]} documentID={user.id}/> */}
                             </TableCell>
-                            <TableCell>
+                            {/* <TableCell>
                                 <Typography color='yellow'>{date.toDateString()}</Typography>
                             </TableCell>
                             <TableCell>
                                 <DeleteForeverSharpIcon color='default' size='large' sx={{ "&:hover":{color:'#F00', backgroundColor:'#555', cursor:'pointer'}}}  onClick={() => {setSelectedValue(user); handleUserDeleteClickOpen(user.id)}}/>
-                            </TableCell>
+                            </TableCell> */}
                         </TableRow>
                         )
                     })}
@@ -133,79 +128,39 @@ export default function Admin() {
   )
 }
 
-function BasicSelect(props) {
-    const [role, setRole] = React.useState('');
+// function BasicSelect(props) {
+//     const [role, setRole] = React.useState('');
   
-    const handleChange = (e) => {
-        firestore.collection('users').doc(props.documentID).update({userRoles: [`${e.target.value}`]})
-        console.log(e.target.value)
-      setRole(e.target.value);
-    };
+//     const handleChange = (e) => {
+//         firestore.collection('users').doc(props.documentID).update({userRoles: [`${e.target.value}`]})
+//         console.log(e.target.value)
+//       setRole(e.target.value);
+//     };
 
-    useEffect(() => {
-        setRole(props.role)
-    }, [])
+//     useEffect(() => {
+//         setRole(props.role)
+//     }, [])
   
-    return (
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
-          <InputLabel id="select-label">Role</InputLabel>
-          <Select
-            labelId="simple-select-label"
-            id="simple-select"
-            value={role}
-            label="Age"
-            onChange={handleChange}
-            size='small'
-            sx={{color:'yellow'}}
-          >
-            <MenuItem value={'superAdmin'}>Super Admin</MenuItem>
-            <MenuItem value={'admin'}>Admin</MenuItem>
-            <MenuItem value={'student'}>Student</MenuItem>
-            <MenuItem value={'stakeHolder'}>StakeHolder</MenuItem>
-            <MenuItem value={'user'}>User</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-    );
-  }
-
-{/* <TableContainer component={Paper} sx={{width:'100%'}}>
-            <Table sx={{ minWidth: 650, backgroundColor:'dodgerblue'}} size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell><Typography color='white' fontWeight='bold'>Name</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Email</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>User Role</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Date Created</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Delete</Typography></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {users.map((user, index) => {
-                        const date = new Date(user.data().createdDate.seconds * 1000)
-                        return(
-                        <TableRow key={index}>
-                            <TableCell>
-                                <Typography color='yellow'>{user.data().displayName ? user.data().displayName : 'NO NAME WAS ENTERED'}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography color='yellow'>{user.data().email}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography color='yellow'>{user.data().userRoles[0]}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography color='yellow'>{date.toDateString()}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Button>
-                                    <DeleteForeverSharpIcon />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        )
-                    })}
-                </TableBody>
-            </Table>
-        </TableContainer> */}
+//     return (
+//       <Box sx={{ minWidth: 120 }}>
+//         <FormControl fullWidth>
+//           <InputLabel id="select-label">Role</InputLabel>
+//           <Select
+//             labelId="simple-select-label"
+//             id="simple-select"
+//             value={role}
+//             label="Age"
+//             onChange={handleChange}
+//             size='small'
+//             sx={{color:'yellow'}}
+//           >
+//             <MenuItem value={'superAdmin'}>Super Admin</MenuItem>
+//             <MenuItem value={'admin'}>Admin</MenuItem>
+//             <MenuItem value={'student'}>Student</MenuItem>
+//             <MenuItem value={'stakeHolder'}>StakeHolder</MenuItem>
+//             <MenuItem value={'user'}>User</MenuItem>
+//           </Select>
+//         </FormControl>
+//       </Box>
+//     );
+//   }

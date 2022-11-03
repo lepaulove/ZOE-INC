@@ -61,8 +61,9 @@ export default function FullAppBar( props ) {
                 <NavButton page={'Get Involved'} clickHandler={() => navigate('/ZOE-INC')} reference={props.props.appBarProps.getInvolvedRef}/>*/}
                 <NavButton page={'Home'} clickHandler={() => navigate('/ZOE-INC')} reference={props.props.appBarProps.getInvolvedRef}/>
                 <NavButton page={'Rources'} clickHandler={() => navigate('/resources')} reference={props.props.appBarProps.getInvolvedRef}/> 
-                {currentUser && <NavButton componentType={'a'} redirect={'/superchat'} page={'Community Square'} /*clickHandler={(() => navigate('/superchat'))}*/ />}
+                {currentUser && <NavButton page={'Community Square'} clickHandler={(() => navigate('/superchat'))}/>}
                 {userProfileData && userProfileData.userRoles[0] === 'admin' && <NavButton page={'Admin'} clickHandler={(() => navigate('/admin'))} />}
+                <NavButton  page={'Private Chat'} clickHandler={(() => navigate('/private-chat'))}/>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
                     <Link style={{textDecoration:'none', color:'white'}} to={`/${path}`}><MenuItem>

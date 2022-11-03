@@ -13,10 +13,16 @@ import { SuperChat } from './Pages/SuperChat';
 import ResetPassword from './Pages/ResetPassword'
 import Admin from './Pages/Admin';
 import Resources from './Pages/Resources';
+import { PrivateChat } from './Pages/PrivateChat';
+import AdminChat from './Pages/AdminChat'
 
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
+})
+
+const mapUserDataState = ({user}) => ({
+    userProfileData: user.userProfileData
 })
 
  const App = () => {
@@ -28,6 +34,8 @@ const mapUserState = ({ user }) => ({
     const aboutRef = useRef(null)
     const contactRef = useRef(null)
     const getInvolvedRef = useRef(null)
+    const { currentUser } = useSelector(mapUserState)
+    const { userProfileData } = useSelector(mapUserDataState)
     const dispatch = useDispatch()
 
 
@@ -78,6 +86,7 @@ const mapUserState = ({ user }) => ({
                 <Route exact path='/reset-password' element={<ResetPassword />}/>
                 <Route exact path='/admin' element={<Admin />} />
                 <Route exact path='resources' element={<Resources />} />
+                <Route exact path='/private-chat' element={userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : <PrivateChat />} />
             </Routes>
         </Router>
     </div>

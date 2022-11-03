@@ -4,6 +4,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
 import ChatMessage from '../Components/ChatMessage';
 import { useSelector } from 'react-redux';
+import { where } from 'firebase/firestore';
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -13,13 +14,15 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
-export const SuperChat = (props) => {
+export const PrivateChat = (props) => {
 
     const [message, setMessage] = useState()
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
     const messagesRef = firestore.collection('messages')
-    const query = messagesRef.orderBy('createdAt').limit(25)
+    const query = messagesRef.where('uid', '==', currentUser.uid)
+
+    console.log(messagesRef)
     
 
     const [messages] = useCollectionData(query, {idField: 'id'})
@@ -35,12 +38,13 @@ export const SuperChat = (props) => {
         })
         setMessage('')
     }
+
   return (
      <Box sx={{backgroundColor:'dodgerblue', py:5, pl:4.5, pr:4, minHeight:'100%'}}>
             {currentUser ? < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{minHeight:'100vh', backgroundColor:'transparent'}}>
-                <Grid item>
+                <Grid item> 
                     <Typography variant='h5' fontWeight='bold'>
-                        Community Square
+                        Private Chat
                     </Typography>
                 </Grid>
                 <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{ backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, borderRadius:10, p:{xs:2, md:6}}}>
@@ -51,8 +55,8 @@ export const SuperChat = (props) => {
                             SEND
                         </Button>
                     </Grid>
-                </Paper>  
-            </Grid> : <Typography>YOU MUST BE LOGGED IN TO VIEW THIS PAGE...</Typography>}
+                </Paper> 
+            </Grid> : <Typography>YOU MUST BE LOGGED IN TO VIEW THIS PAGE...</Typography>} 
         </Box>
   )
 
