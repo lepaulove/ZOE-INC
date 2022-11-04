@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo  } from 'react';
+import React, { useState, useEffect, useRef, createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
 import './App.css';
 import Header from './Components/Header';
@@ -15,6 +15,7 @@ import Admin from './Pages/Admin';
 import Resources from './Pages/Resources';
 import { PrivateChat } from './Pages/PrivateChat';
 import AdminChat from './Pages/AdminChat'
+import WithUserData from './Pages/PrivateChat'
 
 
 const mapUserState = ({ user }) => ({
@@ -25,6 +26,8 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
+export const UserContext = createContext()
+
  const App = () => {
 
     // const [userProfileData, setUserProfileData] = useState(null)
@@ -34,6 +37,7 @@ const mapUserDataState = ({user}) => ({
     const aboutRef = useRef(null)
     const contactRef = useRef(null)
     const getInvolvedRef = useRef(null)
+    const [user, setUser] = useState()
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
     const dispatch = useDispatch()
@@ -46,13 +50,14 @@ const mapUserDataState = ({user}) => ({
             dispatch(emailSignIn(user))
             const userData = async () => { const data = await getSnapshotFromUserAuth(user); dispatch(setUserProfileData(data.data())) }
             userData()
+            setUser(currentUser)
             // console.log(userProfileData.data())
             // setCurrentUser(user)
             
         })
 
         return unsubscribe
-    }, [])
+    }, [currentUser])
 
     const handleHistoryScroll = (reference) => {
 
@@ -82,11 +87,11 @@ const mapUserDataState = ({user}) => ({
                 <Route exact path='/login' element={<Login />}/>
                 <Route exact path='/register' element={<CreateAccount />}/>
                 <Route exact path='/my-account' element={<UserAccount />}/>
-                <Route exact path='/superchat' element={<SuperChat />}/>
+                <Route exact path='/superchat' element={<UserContext.Provider value={user}><SuperChat user={user}/></UserContext.Provider>}/>
                 <Route exact path='/reset-password' element={<ResetPassword />}/>
                 <Route exact path='/admin' element={<Admin />} />
                 <Route exact path='resources' element={<Resources />} />
-                <Route exact path='/private-chat' element={userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : <PrivateChat />} />
+                <Route exact path='/private-chat/*' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} />
             </Routes>
         </Router>
     </div>

@@ -102,7 +102,7 @@ export default function Admin() {
                                 <Typography color='yellow'>{user.data().email}</Typography>
                             </TableCell>
                             <TableCell>
-                                <BootstrapButton onClick={() => {navigate('/private-chat')}}>OPEN CHAT</BootstrapButton>
+                                <BootstrapButton onClick={() => {alert('')}}>OPEN CHAT</BootstrapButton>
                             </TableCell>
                             <TableCell>
                                 {/* <Typography color='yellow'>{user.data().userRoles[0]}</Typography> */}

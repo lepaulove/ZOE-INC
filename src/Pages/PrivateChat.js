@@ -4,7 +4,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
 import ChatMessage from '../Components/ChatMessage';
 import { useSelector } from 'react-redux';
-import { where } from 'firebase/firestore';
+import WithUserData from '../HigherOrderComponents/withUserData';
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -29,11 +29,13 @@ export const PrivateChat = (props) => {
 
     const sendMessage = async() => {
         const uid = currentUser.uid
+        const studentUid = 'props.uid'
         const userName = userProfileData.displayName
         await messagesRef.add({
             text: message,
             createdAt: new Date(),
             uid,
+            studentUid,
             userName 
         })
         setMessage('')
@@ -61,5 +63,7 @@ export const PrivateChat = (props) => {
   )
 
 }
+
+// export default WithUserData(PrivateChat)
 
 

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, createContext } from 'react'
 import { firestore } from '../Firebase/utils'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
 import ChatMessage from '../Components/ChatMessage';
 import { useSelector } from 'react-redux';
+import { UserContext } from '../App';
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -20,6 +21,8 @@ export const SuperChat = (props) => {
     const { userProfileData } = useSelector(mapUserDataState)
     const messagesRef = firestore.collection('messages')
     const query = messagesRef.orderBy('createdAt').limit(25)
+    const user = useContext(UserContext)
+    console.log(user)
     
 
     const [messages] = useCollectionData(query, {idField: 'id'})
@@ -44,7 +47,7 @@ export const SuperChat = (props) => {
                     </Typography>
                 </Grid>
                 <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{ backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, borderRadius:10, p:{xs:2, md:6}}}>
-                    {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === currentUser.uid ? 'flex-end' : 'flex-start'}/>)}
+                    {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === user.uid ? 'flex-end' : 'flex-start'}/>)}
                     <Grid container item justifyContent='flex-end' >
                         <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>
                         <Button fullWidth onClick={() => sendMessage()} sx={{height:50, backgroundColor:'black', mt:1, fontSize:40, border:'3px solid white', color:'#fff', fontWeight:'bold'}}>
