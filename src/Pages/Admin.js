@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import { useSelector } from 'react-redux'
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import Table from '@mui/material/Table';
@@ -15,6 +15,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 import AddResourceModal from '../Components/AddResourceModal';
 import { useNavigate } from 'react-router-dom';
+import { PrivateChat } from './PrivateChat';
+import { AdminChat } from './AdminChat';
 
 
 const mapUserState = ({user}) => ({
@@ -25,6 +27,8 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
+const selectedStuden = createContext()
+
 export default function Admin() {
 
     const { currentUser } = useSelector(mapUserState)
@@ -34,6 +38,7 @@ export default function Admin() {
     const [AddResourceModalOpen, setAddResourceModalOpen] = useState(false)
     const [selectedValue, setSelectedValue] = React.useState();
     const [selectedValue2, setSelectedValue2] = React.useState();
+    const [student, setStudent] = useState(null)
     const navigate = useNavigate()
     const db = getFirestore()
 
@@ -44,6 +49,7 @@ export default function Admin() {
 
     useEffect(() => {
         fetchAllUsers()
+        return setStudent(null)
     }, [])
 
     const handleUserDeleteClickOpen = id => {
@@ -76,7 +82,7 @@ export default function Admin() {
   return (
     // <div style={{paddingTop:50}}>{userProfileData.userRoles[0] === 'user' ? 'YOU ARE NOT AN ADMIN' : 'WELCOME ADMIN'}</div>
     <Box sx={{pt: 10, backgroundColor:'dodgerblue', height:'100vh'}}>
-        { userProfileData && userProfileData.userRoles[0] === 'admin' ? <><BootstrapButton variant='contained' onClick={handleAddResourceModalClickOpen}>
+        { userProfileData && userProfileData.userRoles[0] === 'admin' ? (student ? <AdminChat student={student}/> : <><BootstrapButton variant='contained' onClick={handleAddResourceModalClickOpen}>
             Add Resource
         </BootstrapButton><TableContainer component={Paper} sx={{width:'100%'}}>
             <Table sx={{ minWidth: 650, backgroundColor:'dodgerblue'}} size="small" aria-label="a dense table">
@@ -102,7 +108,7 @@ export default function Admin() {
                                 <Typography color='yellow'>{user.data().email}</Typography>
                             </TableCell>
                             <TableCell>
-                                <BootstrapButton onClick={() => {alert('')}}>OPEN CHAT</BootstrapButton>
+                                <BootstrapButton onClick={() => {setStudent(user)}}>OPEN CHAT</BootstrapButton>
                             </TableCell>
                             <TableCell>
                                 {/* <Typography color='yellow'>{user.data().userRoles[0]}</Typography> */}
@@ -119,7 +125,7 @@ export default function Admin() {
                     })}
                 </TableBody>
             </Table>
-        </TableContainer></>  : <Typography>You do not have the right privalages to view this page</Typography>}
+        </TableContainer></>)  : <Typography>You do not have the right privalages to view this page</Typography>}
         {selectedValue ? <ConfirmDeleteUser
                 selectedValue={selectedValue}
                 open={userDeleteOpen}

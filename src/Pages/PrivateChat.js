@@ -19,13 +19,15 @@ export const PrivateChat = (props) => {
     const [message, setMessage] = useState()
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
-    const messagesRef = firestore.collection('messages')
-    const query = messagesRef.where('uid', '==', currentUser.uid)
+    const messagesRef = firestore.collection('private-messages')
+    const studentQuery = messagesRef.where('uid', '==', currentUser.uid)
+    const adminQuery = messagesRef.where('studentUid', '==', currentUser.uid)
 
     console.log(messagesRef)
     
 
-    const [messages] = useCollectionData(query, {idField: 'id'})
+    const [studentmessages] = useCollectionData(studentQuery, {idField: 'id'})
+    const [adminMessages] = useCollectionData(adminQuery, {idField: 'id'})
 
     const sendMessage = async() => {
         const uid = currentUser.uid
@@ -35,7 +37,6 @@ export const PrivateChat = (props) => {
             text: message,
             createdAt: new Date(),
             uid,
-            studentUid,
             userName 
         })
         setMessage('')
@@ -50,7 +51,7 @@ export const PrivateChat = (props) => {
                     </Typography>
                 </Grid>
                 <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{ backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, borderRadius:10, p:{xs:2, md:6}}}>
-                    {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === currentUser.uid ? 'flex-end' : 'flex-start'}/>)}
+                    {studentmessages && studentmessages.concat(adminMessages).map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === currentUser.uid ? 'flex-end' : 'flex-start'}/>)}
                     <Grid container item justifyContent='flex-end' >
                         <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>
                         <Button fullWidth onClick={() => sendMessage()} sx={{height:50, backgroundColor:'black', mt:1, fontSize:40, border:'3px solid white', color:'#fff', fontWeight:'bold'}}>

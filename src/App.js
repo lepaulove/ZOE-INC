@@ -89,9 +89,11 @@ export const UserContext = createContext()
                 <Route exact path='/my-account' element={<UserAccount />}/>
                 <Route exact path='/superchat' element={<UserContext.Provider value={user}><SuperChat user={user}/></UserContext.Provider>}/>
                 <Route exact path='/reset-password' element={<ResetPassword />}/>
-                <Route exact path='/admin' element={<Admin />} />
+                <Route exact path='/admin' element={<Admin />} >
+                    <Route exact path='/admin/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
+                </Route>
                 <Route exact path='resources' element={<Resources />} />
-                <Route exact path='/private-chat/*' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} />
+                <Route exact path='/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
             </Routes>
         </Router>
     </div>

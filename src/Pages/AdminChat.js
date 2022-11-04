@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { Box, Button, Paper, Typography, InputLabel, MenuItem, FormControl } from '@mui/material';
-import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
-import { firestore } from '../Firebase/utils';
-import ConfirmDeleteUser from '../Components/ConfirmDeleteUser';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { styled } from '@mui/material/styles';
-import AddResourceModal from '../Components/AddResourceModal';
+import React, { useState } from 'react'
+import { firestore } from '../Firebase/utils'
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
+import ChatMessage from '../Components/ChatMessage';
+import { useSelector } from 'react-redux';
+import WithUserData from '../HigherOrderComponents/withUserData';
 
-
-const mapUserState = ({user}) => ({
+const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
 })
 
@@ -24,143 +14,59 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
-export default function AdminChat() {
+export const AdminChat = (props) => {
 
+    const { id } = props.student
+    const [message, setMessage] = useState()
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
-    const [users, setUsers] = useState([])
-    const [userDeleteOpen, setUserDeleteOpen] = React.useState(false);
-    const [AddResourceModalOpen, setAddResourceModalOpen] = useState(false)
-    const [selectedValue, setSelectedValue] = React.useState();
-    const [selectedValue2, setSelectedValue2] = React.useState();
-    const db = getFirestore()
+    const messagesRef = firestore.collection('private-messages')
+    const studentQuery = messagesRef.where('uid', '==', id)
+    const adminQuery = messagesRef.where('studentUid', '==', id)
 
-    const fetchAllUsers = async () => {
-        const querySnapshot = await getDocs(collection(getFirestore(), "users"));
-        setUsers(querySnapshot.docs)
-    };
-
-    useEffect(() => {
-        fetchAllUsers()
-    }, [])
-
-    const handleUserDeleteClickOpen = id => {
-        // if(id === selectedValue2){
-            setUserDeleteOpen(true);
-            console.log(`Deleting User ${id}`)
-        // }
-      };
+    console.log(id)
     
-      const handleAddResourceModalClickOpen = () => {
-        setAddResourceModalOpen(true)
-      }
-    
-      const handleUserDeleteClose = value => {
-        setUserDeleteOpen(false);
-        setSelectedValue(value);
-      };
 
-      const handleAddResourceModalClose = () => {
-        setAddResourceModalOpen(false)
-      }
+    const [studentMessages] = useCollectionData(studentQuery, {idField: 'id'})
+    const [adminMessages] = useCollectionData(adminQuery, {idField: 'id'})
 
-      const BootstrapButton = styled(Button)({
-        backgroundColor: '#000',
-        marginLeft: 40
-      })
-    
-    
+    const sendMessage = async() => {
+        const uid = currentUser.uid
+        const studentUid = id
+        const userName = userProfileData.displayName
+        await messagesRef.add({
+            text: message,
+            createdAt: new Date(),
+            uid,
+            studentUid,
+            userName 
+        })
+        setMessage('')
+    }
 
   return (
-    // <div style={{paddingTop:50}}>{userProfileData.userRoles[0] === 'user' ? 'YOU ARE NOT AN ADMIN' : 'WELCOME ADMIN'}</div>
-    <Box sx={{pt: 10, backgroundColor:'dodgerblue', height:'100vh'}}>
-        { userProfileData && userProfileData.userRoles[0] === 'admin' ? <><BootstrapButton variant='contained' onClick={handleAddResourceModalClickOpen}>
-            Add Resource
-        </BootstrapButton><TableContainer component={Paper} sx={{width:'100%'}}>
-            <Table sx={{ minWidth: 650, backgroundColor:'dodgerblue'}} size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell><Typography color='white' fontWeight='bold'>Name</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Email</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'></Typography></TableCell>
-                        {/* <TableCell><Typography color='white' fontWeight='bold'>Date Created</Typography></TableCell>
-                        <TableCell><Typography color='white' fontWeight='bold'>Delete</Typography></TableCell> */}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {users.map((user, index) => {
-                        const date = new Date(user.data().createdDate.seconds * 1000)
-                        return(
-                        <TableRow key={index}  sx={{ "&:hover":{color:'#0FF', backgroundColor:'#555'}}}>
-                            <TableCell>
-                                <Typography color='yellow'>{user.data().displayName ? user.data().displayName : 'NO NAME WAS ENTERED'}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography color='yellow'>{user.data().email}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <BootstrapButton>Open Chat</BootstrapButton>
-                                {/* <Typography color='yellow'>{user.data().userRoles[0]}</Typography> */}
-                                {/* <BasicSelect role={user.data().userRoles[0]} documentID={user.id}/> */}
-                            </TableCell>
-                            {/* <TableCell>
-                                <Typography color='yellow'>{date.toDateString()}</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <DeleteForeverSharpIcon color='default' size='large' sx={{ "&:hover":{color:'#F00', backgroundColor:'#555', cursor:'pointer'}}}  onClick={() => {setSelectedValue(user); handleUserDeleteClickOpen(user.id)}}/>
-                            </TableCell> */}
-                        </TableRow>
-                        )
-                    })}
-                </TableBody>
-            </Table>
-        </TableContainer></>  : <Typography>You do not have the right privalages to view this page</Typography>}
-        {selectedValue ? <ConfirmDeleteUser
-                selectedValue={selectedValue}
-                open={userDeleteOpen}
-                onClose={handleUserDeleteClose}
-            /> : console.log(selectedValue)}
-        <AddResourceModal 
-            open={AddResourceModalOpen}
-            onClose={handleAddResourceModalClose}
-        />
-    </Box>
+     <Box sx={{backgroundColor:'dodgerblue', py:5, pl:4.5, pr:4, minHeight:'100%'}}>
+            {currentUser ? < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{minHeight:'100vh', backgroundColor:'transparent'}}>
+                <Grid item> 
+                    <Typography variant='h5' fontWeight='bold'>
+                        {props ? `${props.student.data().displayName}'s Private Chat` : 'Private Chat'}
+                    </Typography>
+                </Grid>
+                <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{ backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, borderRadius:10, p:{xs:2, md:6}}}>
+                    {studentMessages && studentMessages.concat(adminMessages).map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === currentUser.uid ? 'flex-end' : 'flex-start'}/>)}
+                    <Grid container item justifyContent='flex-end' >
+                        <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>
+                        <Button fullWidth onClick={() => sendMessage()} sx={{height:50, backgroundColor:'black', mt:1, fontSize:40, border:'3px solid white', color:'#fff', fontWeight:'bold'}}>
+                            SEND
+                        </Button>
+                    </Grid>
+                </Paper> 
+            </Grid> : <Typography>YOU MUST BE LOGGED IN TO VIEW THIS PAGE...</Typography>} 
+        </Box>
   )
+
 }
 
-// function BasicSelect(props) {
-//     const [role, setRole] = React.useState('');
-  
-//     const handleChange = (e) => {
-//         firestore.collection('users').doc(props.documentID).update({userRoles: [`${e.target.value}`]})
-//         console.log(e.target.value)
-//       setRole(e.target.value);
-//     };
+// export default WithUserData(PrivateChat)
 
-//     useEffect(() => {
-//         setRole(props.role)
-//     }, [])
-  
-//     return (
-//       <Box sx={{ minWidth: 120 }}>
-//         <FormControl fullWidth>
-//           <InputLabel id="select-label">Role</InputLabel>
-//           <Select
-//             labelId="simple-select-label"
-//             id="simple-select"
-//             value={role}
-//             label="Age"
-//             onChange={handleChange}
-//             size='small'
-//             sx={{color:'yellow'}}
-//           >
-//             <MenuItem value={'superAdmin'}>Super Admin</MenuItem>
-//             <MenuItem value={'admin'}>Admin</MenuItem>
-//             <MenuItem value={'student'}>Student</MenuItem>
-//             <MenuItem value={'stakeHolder'}>StakeHolder</MenuItem>
-//             <MenuItem value={'user'}>User</MenuItem>
-//           </Select>
-//         </FormControl>
-//       </Box>
-//     );
-//   }
+
