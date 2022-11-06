@@ -10,7 +10,7 @@ const theme = createTheme({
     }
 })
 
-export default function Resources() {
+export default function Partnerships() {
 
     const [resources, setResources] = useState([])
     const db = getFirestore()
@@ -34,7 +34,7 @@ export default function Resources() {
             <Box sx={{backgroundColor:'dodgerblue', py:4}}>
                 < Grid container direction={{xs: 'row', md: 'column'}} spacing={{xs:4}} alignItems='center' justifyContent='center' sx={{minHeight:'100vh', pt: {xs: 4, md:0}, backgroundColor:'transparent'}}>
                     <Grid item>
-                        <Typography variant='h3' fontWeight='bold'>RESOURCES</Typography>
+                        <Typography variant='h3' fontWeight='bold'>PARTNERSHIPS</Typography>
                     </Grid>
                     <Grid item container justifyContent='space-around' spacing={4}>
                         {resources.map((item, index) => {

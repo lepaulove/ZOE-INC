@@ -5,6 +5,7 @@ import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
 import ChatMessage from '../Components/ChatMessage';
 import { useSelector } from 'react-redux';
 import WithUserData from '../HigherOrderComponents/withUserData';
+import { query, where, orderBy, limit } from "firebase/firestore";
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -20,15 +21,15 @@ export const AdminChat = (props) => {
     const [message, setMessage] = useState()
     const { currentUser } = useSelector(mapUserState)
     const { userProfileData } = useSelector(mapUserDataState)
-    const messagesRef = firestore.collection('private-messages')
-    const studentQuery = messagesRef.where('uid', '==', id)
-    const adminQuery = messagesRef.where('studentUid', '==', id)
+    const messagesRef = firestore.collection(`private-messages/${id}/chat`)
+    const studentQuery = messagesRef.orderBy('createdAt').limit(25)
+    // const adminQuery = messagesRef.where('studentUid', '==', id).orderBy('createdAt').limit(25)
 
     console.log(id)
     
 
     const [studentMessages] = useCollectionData(studentQuery, {idField: 'id'})
-    const [adminMessages] = useCollectionData(adminQuery, {idField: 'id'})
+    // const [adminMessages] = useCollectionData(adminQuery, {idField: 'id'})
 
     const sendMessage = async() => {
         const uid = currentUser.uid
@@ -53,9 +54,9 @@ export const AdminChat = (props) => {
                     </Typography>
                 </Grid>
                 <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{ backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, borderRadius:10, p:{xs:2, md:6}}}>
-                    {studentMessages && studentMessages.concat(adminMessages).map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === currentUser.uid ? 'flex-end' : 'flex-start'}/>)}
+                    {studentMessages && studentMessages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
                     <Grid container item justifyContent='flex-end' >
-                        <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>
+                        <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ mt:3, input:{ color: 'white'}, borderRadius:3, color:'white'}}/>
                         <Button fullWidth onClick={() => sendMessage()} sx={{height:50, backgroundColor:'black', mt:1, fontSize:40, border:'3px solid white', color:'#fff', fontWeight:'bold'}}>
                             SEND
                         </Button>

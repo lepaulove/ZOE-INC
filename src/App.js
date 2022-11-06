@@ -16,6 +16,7 @@ import Resources from './Pages/Resources';
 import { PrivateChat } from './Pages/PrivateChat';
 import AdminChat from './Pages/AdminChat'
 import WithUserData from './Pages/PrivateChat'
+import Partnerships from './Pages/Partnerships';
 
 
 const mapUserState = ({ user }) => ({
@@ -93,6 +94,7 @@ export const UserContext = createContext()
                     <Route exact path='/admin/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
                 </Route>
                 <Route exact path='resources' element={<Resources />} />
+                <Route exact path='partnerships' element={<Partnerships />} />
                 <Route exact path='/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
             </Routes>
         </Router>

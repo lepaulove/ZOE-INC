@@ -47,7 +47,7 @@ export const SuperChat = (props) => {
                     </Typography>
                 </Grid>
                 <Paper item container elevation={10} direction='column' spacing={{xs:2}} sx={{ backgroundColor: 'gray', width:{xs:'90vw', md:'80vw'}, borderRadius:10, p:{xs:2, md:6}}}>
-                    {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} flex={msg.uid === user.uid ? 'flex-end' : 'flex-start'}/>)}
+                    {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
                     <Grid container item justifyContent='flex-end' >
                         <TextField fullWidth label='Enter Message...' value={message} onChange={(e) => { setMessage(e.target.value) }} sx={{ input:{ color: 'white'}, borderRadius:3, color:'white'}}/>
                         <Button fullWidth onClick={() => sendMessage()} sx={{height:50, backgroundColor:'black', mt:1, fontSize:40, border:'3px solid white', color:'#fff', fontWeight:'bold'}}>
