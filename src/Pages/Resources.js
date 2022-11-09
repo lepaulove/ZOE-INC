@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Grid, Button, Typography, ThemeProvider, createTheme, Card, CardActions, CardContent, CardMedia, Divider, List, ListItem } from '@mui/material'
+import { Box, Grid, Typography, ThemeProvider, createTheme, Card, CardContent, Divider, List, ListItem, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
+import { firestore } from '../Firebase/utils';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 const theme = createTheme({
@@ -13,40 +15,63 @@ const theme = createTheme({
 export default function Resources() {
 
     const [resources, setResources] = useState([])
+    const [ filteredResources, setFilteredResources ] = useState([])
+    const [category, setCategory] = useState('Show All');
+    const categories = ['Show All', 'Crisis & Warm Support', 'Covid-19', 'Domestic Violence', 'Sexual Assault', 'LGBTQ+', 'Substance Abuse', 'Veterans', 'Families', 'EDOs', 'Necessities', 'Other']
+    const resourceRef = firestore.collection('communityResources')
     const db = getFirestore()
 
     const fetchAllResources = async () => {
         const querySnapshot = await getDocs(collection(db, "communityResources"))
-        setResources(querySnapshot.docs) 
-        // setResources(['this', 'that', 'other']) 
+        setResources(querySnapshot.docs)
     }
 
-    useEffect(() => {
-        if(resources.length < 1)
-            fetchAllResources()
+    const handleChange = (e) => {
+        setCategory(e.target.value);
+    }
 
-        console.log(resources)
+    
+    console.log(`Filtered Resources: ${filteredResources}`)
+    console.log(`Resources: ${resources}`)
+    console.log(`Current Category: ${category}`)
+
+    useEffect(() => {
+        fetchAllResources()
         return
-    }, [resources])
+    }, []) 
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{backgroundColor:'dodgerblue', py:4}}>
+            <Box sx={{ backgroundColor:'#004FFF', background:'linear-gradient(to left bottom, #004FFF, #005 120%)', py:4}}>
                 < Grid container direction={{xs: 'row', md: 'column'}} spacing={{xs:4}} alignItems='center' justifyContent='center' sx={{minHeight:'100vh', pt: {xs: 4, md:0}, backgroundColor:'transparent'}}>
                     <Grid item>
-                        <Typography variant='h3' fontWeight='bold'>RESOURCES</Typography>
+                        <Typography variant='h3' color='white' fontWeight='bold'>RESOURCES</Typography>
+                    </Grid>
+                    <Grid item sx={{minWidth:{xs:'90vw', md:'40vw'}}}>
+                        <Box >
+                            <FormControl fullWidth>
+                            <InputLabel id="select-label">CATEGORY</InputLabel>
+                            <Select
+                                labelId="select-label"
+                                id="select"
+                                value={category}
+                                label="CATEGORY"
+                                onChange={handleChange}
+                                size='large'
+                                sx={{color:'yellow'}}
+                            >
+                                {categories.map((item, index) => {
+                                    return (<MenuItem key={index} value={`${item}`}>{item}</MenuItem>)
+                                })}
+                            </Select>
+                            </FormControl>
+                        </Box>
                     </Grid>
                     <Grid item container justifyContent='space-around' spacing={4}>
-                        {resources.map((item, index) => {
-                            console.log(item.data())
+                        {resources.filter( i => {return category === 'Show All' ? i.data() : i.data().category === category}).map((item, index) => {
                             return(
                                 <Grid item key={index}>
-                                    <Card raised sx={{ maxWidth: 345, height:'100%', backgroundColor:'black', color:'white' }}>
-                                        {/* <CardMedia
-                                            component="img"
-                                            height="140"
-                                            image={img}
-                                        /> */}
+                                    <Card raised sx={{ maxWidth: 345, height:'100%', background:'linear-gradient(180deg, #000, #333 90%)', color:'white' }}>
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" fontWeight='bold' component="div">
                                                 {item.data().focus}
@@ -72,10 +97,6 @@ export default function Resources() {
                                                 })}
                                             
                                         </CardContent>
-                                        {/* <CardActions>
-                                            <Button size="small">Share</Button>
-                                            <Button size="small">Learn More</Button>
-                                        </CardActions> */}
                                         </Card>
                                 </Grid>)
                         })}                 

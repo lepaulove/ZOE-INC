@@ -27,7 +27,7 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
-export const UserContext = createContext()
+export const resourceContext = createContext()
 
  const App = () => {
 
@@ -58,7 +58,7 @@ export const UserContext = createContext()
         })
 
         return unsubscribe
-    }, [currentUser])
+    }, [])
 
     const handleHistoryScroll = (reference) => {
 
@@ -88,7 +88,7 @@ export const UserContext = createContext()
                 <Route exact path='/login' element={<Login />}/>
                 <Route exact path='/register' element={<CreateAccount />}/>
                 <Route exact path='/my-account' element={<UserAccount />}/>
-                <Route exact path='/superchat' element={<UserContext.Provider value={user}><SuperChat user={user}/></UserContext.Provider>}/>
+                <Route exact path='/superchat' element={<SuperChat user={user}/>}/>
                 <Route exact path='/reset-password' element={<ResetPassword />}/>
                 <Route exact path='/admin' element={<Admin />} >
                     <Route exact path='/admin/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 

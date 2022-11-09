@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import img from './../Media/images/LOGO.png'
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -51,7 +52,8 @@ export default function FullAppBar( props ) {
                 color: 'inherit',
                 textDecoration: 'none',
                 }}>
-                LOGO
+                    LOGO
+                {/* <img style={{height:70, width:70}} src={img}></img> */}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {/* <NavButton page={'Who Are We'} clickHandler={() => navigate('/ZOE-INC')} reference={props.props.appBarProps.historyRef}/>

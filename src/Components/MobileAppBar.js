@@ -108,6 +108,13 @@ export default function MobileAppBar(props) {
                                     </ListItemButton>
                                 </ListItem>
                             </Link>
+                            <Link to='/partnerships'style={{textDecoration: 'none'}}>
+                                <ListItem>
+                                    <ListItemButton onClick={toggleDrawer}>
+                                        <Typography sx={{color:'white'}}>PARTNERSHIPS</Typography>
+                                    </ListItemButton>
+                                </ListItem>
+                            </Link>
                             {currentUser && 
                             <Link to='/superchat'style={{textDecoration: 'none'}}>
                                 <ListItem>

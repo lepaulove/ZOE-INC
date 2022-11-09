@@ -4,7 +4,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Grid, TextField, Button, Typography, Paper } from '@mui/material'
 import ChatMessage from '../Components/ChatMessage';
 import { useSelector } from 'react-redux';
-import { UserContext } from '../App';
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -21,8 +20,6 @@ export const SuperChat = (props) => {
     const { userProfileData } = useSelector(mapUserDataState)
     const messagesRef = firestore.collection('messages')
     const query = messagesRef.orderBy('createdAt').limit(25)
-    const user = useContext(UserContext)
-    console.log(user)
     
 
     const [messages] = useCollectionData(query, {idField: 'id'})

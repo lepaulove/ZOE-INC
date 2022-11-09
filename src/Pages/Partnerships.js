@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Grid, Button, Typography, ThemeProvider, createTheme, Card, CardActions, CardContent, CardMedia, Divider, List, ListItem } from '@mui/material'
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import img from '../Media/images/100-BM-New-Logo-k-871-®.png'
+import img2 from '../Media/images/kap-logo.png'
+import img3 from '../Media/images/Open Arms Logo.png'
 
 const theme = createTheme({
     palette:{
@@ -22,11 +25,7 @@ export default function Partnerships() {
     }
 
     useEffect(() => {
-        if(resources.length < 1)
-            fetchAllResources()
-
-        console.log(resources)
-        return
+        
     }, [resources])
 
     return (
@@ -37,30 +36,36 @@ export default function Partnerships() {
                         <Typography variant='h3' fontWeight='bold'>PARTNERSHIPS</Typography>
                     </Grid>
                     <Grid item container justifyContent='space-around' spacing={4}>
-                        {resources.map((item, index) => {
+                        {/* {resources.map((item, index) => {
                             console.log(item.data())
-                            return(
-                                <Grid item key={index}>
+                            return( */}
+                                <Grid item >
                                     <Card raised sx={{ maxWidth: 345, height:'100%', backgroundColor:'black', color:'white' }}>
-                                        {/* <CardMedia
+                                        <CardMedia
+                                            sx={{backgroundColor:'white'}}
                                             component="img"
                                             height="140"
                                             image={img}
-                                        /> */}
+                                        />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" fontWeight='bold' component="div">
-                                                {item.data().focus}
+                                                {/* {item.data().focus} */}
                                             </Typography>
 
                                             <Divider sx={{backgroundColor:'dodgerblue', my:2.5}} variant='middle'/>
 
-                                            <Typography variant="body3">
-                                                {item.data().details}
+                                            <Typography gutterBottom variant="h6" fontWeight='bold' component="div">
+                                                100 BLACK MEN of AMERICA, INC®
+                                                {/* {item.data().details} */}
                                             </Typography>
 
                                             <Divider sx={{backgroundColor:'dodgerblue', my:2.5}} variant='middle'/>
                                             
-                                                {item.data().contacts.map((item, index) => {
+                                            <Typography variant="body3" fontWeight='bold' >
+                                                LEARN MORE
+                                                {/*`${item.contactType}: ${item.contactInfo}`*/}
+                                            </Typography>
+                                                {/*item.data().contacts.map((item, index) => {
                                                     return(
                                                         <List>
                                                             <ListItem>
@@ -69,7 +74,7 @@ export default function Partnerships() {
                                                                 </Typography>
                                                             </ListItem>
                                                         </List>)
-                                                })}
+                                                })*/}
                                             
                                         </CardContent>
                                         {/* <CardActions>
@@ -77,8 +82,62 @@ export default function Partnerships() {
                                             <Button size="small">Learn More</Button>
                                         </CardActions> */}
                                         </Card>
-                                </Grid>)
-                        })}                 
+                                </Grid>{/*)*/}
+                        {/*)}}*/}
+                                <Grid item >
+                                    <Card raised sx={{ maxWidth: 345, height:'100%', backgroundColor:'black', color:'white' }}>
+                                        <CardMedia
+                                            sx={{backgroundColor:'white'}}
+                                            component="img"
+                                            height="140"
+                                            image={img2}
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" fontWeight='bold' component="div">
+                                            </Typography>
+
+                                            <Divider sx={{backgroundColor:'dodgerblue', my:2.5}} variant='middle'/>
+
+                                            <Typography gutterBottom variant="h6" fontWeight='bold' component="div">
+                                                KAPPA ALPHA PSI FRATERNITY, INC®
+                                            </Typography>
+
+                                            <Divider sx={{backgroundColor:'dodgerblue', my:2.5}} variant='middle'/>
+                                            
+                                            <Typography variant="body3" fontWeight='bold' >
+                                                LEARN MORE
+                                            </Typography>
+                                            
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                                <Grid item >
+                                    <Card raised sx={{ maxWidth: 345, height:'100%', backgroundColor:'black', color:'white' }}>
+                                        <CardMedia
+                                            sx={{backgroundColor:'white'}}
+                                            component="img"
+                                            height="140"
+                                            image={img3}
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" fontWeight='bold' component="div">
+                                            </Typography>
+
+                                            <Divider sx={{backgroundColor:'dodgerblue', my:2.5}} variant='middle'/>
+
+                                            <Typography gutterBottom variant="h6" fontWeight='bold' component="div">
+                                                Open Arms, INC®
+                                            </Typography>
+
+                                            <Divider sx={{backgroundColor:'dodgerblue', my:2.5}} variant='middle'/>
+                                            
+                                            <Typography variant="body3" fontWeight='bold' >
+                                                LEARN MORE
+                                            </Typography>
+                                            
+                                        </CardContent>
+                                    </Card>
+                                </Grid>                              
                     </Grid>
                 </Grid>
             </Box>
