@@ -17,6 +17,8 @@ import { PrivateChat } from './Pages/PrivateChat';
 import AdminChat from './Pages/AdminChat'
 import WithUserData from './Pages/PrivateChat'
 import Partnerships from './Pages/Partnerships';
+import Stakeholder from './Pages/StakeholderReferal';
+
 
 
 const mapUserState = ({ user }) => ({
@@ -27,7 +29,7 @@ const mapUserDataState = ({user}) => ({
     userProfileData: user.userProfileData
 })
 
-export const resourceContext = createContext()
+export const UserContext = createContext()
 
  const App = () => {
 
@@ -58,7 +60,7 @@ export const resourceContext = createContext()
         })
 
         return unsubscribe
-    }, [])
+    }, [currentUser])
 
     const handleHistoryScroll = (reference) => {
 
@@ -88,7 +90,7 @@ export const resourceContext = createContext()
                 <Route exact path='/login' element={<Login />}/>
                 <Route exact path='/register' element={<CreateAccount />}/>
                 <Route exact path='/my-account' element={<UserAccount />}/>
-                <Route exact path='/superchat' element={<SuperChat user={user}/>}/>
+                <Route exact path='/superchat' element={<UserContext.Provider value={user}><SuperChat user={user}/></UserContext.Provider>}/>
                 <Route exact path='/reset-password' element={<ResetPassword />}/>
                 <Route exact path='/admin' element={<Admin />} >
                     <Route exact path='/admin/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
@@ -96,6 +98,7 @@ export const resourceContext = createContext()
                 <Route exact path='resources' element={<Resources />} />
                 <Route exact path='partnerships' element={<Partnerships />} />
                 <Route exact path='/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
+                <Route exact path='/stakeholder-referal' element={<Stakeholder/>} />
             </Routes>
         </Router>
     </div>

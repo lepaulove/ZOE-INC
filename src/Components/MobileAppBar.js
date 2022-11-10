@@ -133,6 +133,15 @@ export default function MobileAppBar(props) {
                                 </ListItem>
                             </Link>
                             }
+                            {userProfileData && userProfileData.userRoles[0] === 'stakeHolder' && 
+                                <Link to='/stakeholder'style={{textDecoration: 'none'}}>
+                                    <ListItem>
+                                        <ListItemButton onClick={toggleDrawer}>
+                                            <Typography sx={{color:'white'}}>STAKEHOLDER</Typography>
+                                        </ListItemButton>
+                                    </ListItem>
+                                </Link>
+                            }
                             {userProfileData && userProfileData.userRoles[0] === 'admin' && 
                                 <Link to='/admin'style={{textDecoration: 'none'}}>
                                     <ListItem>

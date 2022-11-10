@@ -66,6 +66,7 @@ export default function FullAppBar( props ) {
                 <NavButton page={'Meet Our Partners'} clickHandler={() => navigate('/partnerships')} reference={props.props.appBarProps.getInvolvedRef}/> 
                 {currentUser && <NavButton page={'Community Square'} clickHandler={(() => navigate('/superchat'))}/>}
                 {userProfileData && userProfileData.userRoles[0] === 'admin' && <NavButton page={'Admin'} clickHandler={(() => navigate('/admin'))} />}
+                {userProfileData && userProfileData.userRoles[0] === 'stakeHolder' && <NavButton page={'Stakeholder Referals'} clickHandler={(() => navigate('/stakeholder'))} />}
                 {currentUser && <NavButton  page={'Private Chat'} clickHandler={(() => navigate('/private-chat'))}/>}
             </Box>
             <Box sx={{ flexGrow: 0 }}>

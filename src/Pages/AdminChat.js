@@ -46,7 +46,7 @@ export const AdminChat = (props) => {
     }
 
   return (
-     <Box sx={{backgroundColor:'dodgerblue', py:5, pl:4.5, pr:4, minHeight:'100%'}}>
+     <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)', py:5, pl:4.5, pr:4, minHeight:'100%'}}>
             {currentUser ? < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{minHeight:'100vh', backgroundColor:'transparent'}}>
                 <Grid item> 
                     <Typography variant='h5' fontWeight='bold'>

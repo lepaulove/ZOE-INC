@@ -10,7 +10,7 @@ const mapState = ({ user }) => ({
     currentUser: user.currentUser
 })
 
-const Login = () => {
+const Stakeholder = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -82,7 +82,7 @@ const Login = () => {
             <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)'}}>
                 < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', pt: 4, backgroundColor:'transparent'}}>
                     <Grid item>
-                        <Typography variant='h3' fontWeight='bold' color='white'>LOGIN</Typography>
+                    <Typography variant='h4' fontWeight={'bold'} color='silver'>LOGIN</Typography>
                     </Grid>
                     <Grid item container direction='row' justifyContent='center' spacing={{xs:2}}>
                         <Grid item xs={9} md={6.01}>
@@ -92,23 +92,23 @@ const Login = () => {
                             <TextField fullWidth type='password' helperText={passwordError} error={passwordError ? true : false} label='PASSWORD' value={password} onChange={getPassword}/>
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
-                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}} onClick={handleLogin}>
-                                <Typography color='silver'>
+                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={handleLogin}>
+                                <Typography>
                                     LOGIN
                                 </Typography>
                             </Button>
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
                             <Link to='/register'>
-                                <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}} /*</Grid>onClick={() => {navigate('/register')}}*/>
-                                    <Typography sx={{textDecoration: 'none', color:'silver'}}>
+                                <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} /*</Grid>onClick={() => {navigate('/register')}}*/>
+                                    <Typography sx={{textDecoration: 'none', color:'white'}}>
                                         Register
                                     </Typography>
                                 </Button>
                             </Link>
                             <Grid item xs={7} pt={1} >
                                 <Link to='/reset-password'>
-                                    <Typography color='white' variant='button' sx={{fontSize:{xs:12, md:15}, '&:hover':{cursor:'pointer'}}}>
+                                    <Typography  variant='button' /*onClick={() => {navigate('/reset-password')}}*/ sx={{fontSize:20, '&:hover':{cursor:'pointer'}}}>
                                         Forgot Password?
                                     </Typography>
                                 </Link>
@@ -136,4 +136,4 @@ const Login = () => {
 
 }
 
-export default Login
+export default Stakeholder
