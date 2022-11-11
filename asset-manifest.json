@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ZOE-INC/static/css/main.49fa8e79.css",
-    "main.js": "/ZOE-INC/static/js/main.5fee727f.js",
+    "main.js": "/ZOE-INC/static/js/main.520116b3.js",
     "static/js/512.7bc411ff.chunk.js": "/ZOE-INC/static/js/512.7bc411ff.chunk.js",
     "static/media/Open Arms Logo.png": "/ZOE-INC/static/media/Open Arms Logo.414ddd0fc0e45d3c6981.png",
     "static/media/LOGO.png": "/ZOE-INC/static/media/LOGO.e848b5486353eb8a9059.png",
@@ -10,11 +10,11 @@
     "static/media/logo.svg": "/ZOE-INC/static/media/logo.db36153e906043854e743ee53cf5fff2.svg",
     "index.html": "/ZOE-INC/index.html",
     "main.49fa8e79.css.map": "/ZOE-INC/static/css/main.49fa8e79.css.map",
-    "main.5fee727f.js.map": "/ZOE-INC/static/js/main.5fee727f.js.map",
+    "main.520116b3.js.map": "/ZOE-INC/static/js/main.520116b3.js.map",
     "512.7bc411ff.chunk.js.map": "/ZOE-INC/static/js/512.7bc411ff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.49fa8e79.css",
-    "static/js/main.5fee727f.js"
+    "static/js/main.520116b3.js"
   ]
 }
