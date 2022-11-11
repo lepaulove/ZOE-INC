@@ -18,6 +18,7 @@ export const handleSignUp = async (displayName, email, password, confirmPassword
         user = await auth.createUserWithEmailAndPassword(email, password)
         // .then(userCredentials => {
             // user = userCredentials
+            console.log(user.user)
             handleUserProfile( user.user, { displayName })
             return user
         // }).catch(error => {console.log(error)})
