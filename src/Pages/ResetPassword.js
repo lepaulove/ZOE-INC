@@ -53,7 +53,17 @@ const ResetPassword = () => {
                     </Grid>
                     <Grid item container direction='row' justifyContent='center' spacing={{xs:2}}>
                         <Grid item xs={9} md={6.01}>
-                            <TextField fullWidth type='email' helperText={emailError} error={emailError} label='EMAIL' value={email} onChange={getEmail} />
+                            <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth type='email' helperText={emailError} error={emailError} label='EMAIL' value={email} onChange={getEmail} />
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
                             <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}} onClick={handlePasswordReset}>

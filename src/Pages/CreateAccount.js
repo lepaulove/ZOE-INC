@@ -105,16 +105,56 @@ const CreateAccount = () => {
                 </Grid>
                 <Grid item container justifyContent='center' spacing={{xs:2}}>
                     <Grid item xs={9}>
-                        <TextField fullWidth error={nameError} helperText={nameError} label='NAME' value={name} onChange={getName}/>
+                        <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth error={nameError} helperText={nameError} label='NAME' value={name} onChange={getName}/>
                     </Grid>
                     <Grid item xs={9}>
-                        <TextField fullWidth error={emailError} helperText={emailError} label='EMAIL' value={email} onChange={getEmail}/>
+                        <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth error={emailError} helperText={emailError} label='EMAIL' value={email} onChange={getEmail}/>
                     </Grid>
                     <Grid item xs={9}>
-                        <TextField fullWidth error={passwordError} helperText={passwordError} type='password' label='PASSWORD' value={password} onChange={getPassword}/>
+                        <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth error={passwordError} helperText={passwordError} type='password' label='PASSWORD' value={password} onChange={getPassword}/>
                     </Grid>
                     <Grid item xs={9}>
-                        <TextField fullWidth error={confirmPasswordError} helperText={confirmPasswordError} type='password' label='CONFIRM PASSWORD' value={confirmPassword} onChange={getConfirmPassword}/>
+                        <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth error={confirmPasswordError} helperText={confirmPasswordError} type='password' label='CONFIRM PASSWORD' value={confirmPassword} onChange={getConfirmPassword}/>
                     </Grid>
                     <Grid item xs={8.4}>
                         <Button onClick={() => submitForm()} fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}}>
