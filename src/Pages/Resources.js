@@ -49,8 +49,8 @@ export default function Resources() {
                     </Grid>
                     <Grid item sx={{minWidth:{xs:'90vw', md:'40vw'}}}>
                         <Box >
-                            <FormControl fullWidth>
-                            <InputLabel id="select-label">CATEGORY</InputLabel>
+                            <FormControl  fullWidth>
+                            <InputLabel id="select-label" sx={{color: 'silver', '&.Mui-focused': {color:'silver'} }}>CATEGORY</InputLabel>
                             <Select
                                 labelId="select-label"
                                 id="select"
@@ -58,7 +58,21 @@ export default function Resources() {
                                 label="CATEGORY"
                                 onChange={handleChange}
                                 size='large'
-                                sx={{color:'red'}}
+                                sx={{
+                                    color: "white",
+                                    '.MuiOutlinedInput-notchedOutline': {
+                                      borderColor: 'silver',
+                                    },
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                      borderColor: 'silver',
+                                    },
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                      borderColor: 'silver',
+                                    },
+                                    '.MuiSvgIcon-root ': {
+                                      fill: "white !important",
+                                    }
+                                  }}
                             >
                                 {categories.map((item, index) => {
                                     return (<MenuItem key={index} value={`${item}`}>{item}</MenuItem>)

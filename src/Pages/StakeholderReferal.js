@@ -88,15 +88,45 @@ const Stakeholder = () => {
                     <Grid item container direction='row' justifyContent='center' spacing={{xs:2}}>
                         <Grid item container direction='row' spacing={2} xs={9} md={6.01}>
                             <Grid item xs={12} md={6}>
-                                <TextField fullWidth type='text' helperText={passwordError ? '' : emailError} error={emailError ? true : false} label='FIRST NAME' value={email} onChange={getEmail} />
+                                <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth type='text' helperText={passwordError ? '' : emailError} error={emailError ? true : false} label='FIRST NAME' value={email} onChange={getEmail} />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <TextField fullWidth type='text' helperText={passwordError ? '' : emailError} error={emailError ? true : false} label='LAST NAME' value={email} onChange={getEmail} />
+                                <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth type='text' helperText={passwordError ? '' : emailError} error={emailError ? true : false} label='LAST NAME' value={email} onChange={getEmail} />
                             </Grid>
-                            <Tooltip title='Name of person being refered' sx={{pl:2, pt:.5}}><HelpOutlineIcon /></Tooltip>
+                            <Tooltip  title='Name of the person being refered' sx={{}}><HelpOutlineIcon sx={{color: 'silver', pl:2, pt:.5}}/></Tooltip>
                         </Grid>
                         <Grid item xs={9} md={6.01}>
-                            <TextField fullWidth type='password' helperText={passwordError} error={passwordError ? true : false} label='PASSWORD' value={password} onChange={getPassword}/>
+                            <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'silver',
+      },
+      '&:hover fieldset': {
+        borderColor: 'lightgray',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    }}} fullWidth type='password' helperText={passwordError} error={passwordError ? true : false} label='PASSWORD' value={password} onChange={getPassword}/>
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
                             <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={handleLogin}>
