@@ -18,7 +18,8 @@ export const handleSignUp = async (displayName, email, password, confirmPassword
         user = await auth.createUserWithEmailAndPassword(email, password)
         // .then(userCredentials => {
             // user = userCredentials
-            handleUserProfile( user.user, { displayName })
+            console.log(user.user)
+            handleUserProfile( user.user, displayName )
             return user
         // }).catch(error => {console.log(error)})
       }else{
@@ -47,16 +48,19 @@ export const handleUserProfile = async(userAuth, additionalData) => {
     
 
     if(!snapshot.exists){
-        const { displayName, email} = userAuth
+        const  displayName  = additionalData
+        const { email } = userAuth
         const timeStamp = new Date()
         const userRoles = ['user']
+        console.log(displayName)
+        console.log(userAuth)
         try{
             await userRef.set({
                 displayName,
                 email,
                 createdDate: timeStamp,
                 userRoles,
-                ...additionalData
+                //...additionalData
             })
         }catch(err){
             console.log(err)
