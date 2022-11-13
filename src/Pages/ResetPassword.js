@@ -46,18 +46,18 @@ const ResetPassword = () => {
 
     return(
         <ThemeProvider theme={theme}>
-            <Box sx={{backgroundColor:'dodgerblue'}}>
+            <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)'}}>
                 < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', pt: 4, backgroundColor:'transparent'}}>
                     <Grid item>
-                        <h1>RESET PASSWORD</h1>
+                        <Typography variant='h4' fontWeight='bold' color='silver'>RESET PASSWORD</Typography>
                     </Grid>
                     <Grid item container direction='row' justifyContent='center' spacing={{xs:2}}>
                         <Grid item xs={9} md={6.01}>
                             <TextField fullWidth type='email' helperText={emailError} error={emailError} label='EMAIL' value={email} onChange={getEmail} />
                         </Grid>
                         <Grid item xs={8.4} md={6.01}>
-                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}} onClick={handlePasswordReset}>
-                                <Typography>
+                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}} onClick={handlePasswordReset}>
+                                <Typography color='silver'>
                                     RESET PASSWORD
                                 </Typography>
                             </Button>

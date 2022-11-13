@@ -45,7 +45,7 @@ export default function Resources() {
             <Box sx={{ backgroundColor:'#004FFF', background:'linear-gradient(to left bottom, #004FFF, #005 120%)', py:4}}>
                 < Grid container direction={{xs: 'row', md: 'column'}} spacing={{xs:4}} alignItems='center' justifyContent='center' sx={{minHeight:'100vh', pt: {xs: 4, md:0}, backgroundColor:'transparent'}}>
                     <Grid item>
-                        <Typography variant='h3' color='white' fontWeight='bold'>RESOURCES</Typography>
+                        <Typography variant='h3' color='silver' fontWeight='bold'>RESOURCES</Typography>
                     </Grid>
                     <Grid item sx={{minWidth:{xs:'90vw', md:'40vw'}}}>
                         <Box >
@@ -58,7 +58,7 @@ export default function Resources() {
                                 label="CATEGORY"
                                 onChange={handleChange}
                                 size='large'
-                                sx={{color:'yellow'}}
+                                sx={{color:'red'}}
                             >
                                 {categories.map((item, index) => {
                                     return (<MenuItem key={index} value={`${item}`}>{item}</MenuItem>)

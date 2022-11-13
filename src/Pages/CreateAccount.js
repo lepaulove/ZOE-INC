@@ -98,10 +98,10 @@ const CreateAccount = () => {
     return(
         
         <ThemeProvider theme={theme}>
-        <Box sx={{backgroundColor:'dodgerblue'}}>
+        <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)', pt:3}}>
             < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', backgroundColor:'transparent'}}>
                 <Grid item>
-                    <h1>CREATE ACCOUNT</h1>
+                   <Typography variant='h4' fontWeight='bold' color='silver'>CREATE ACCOUNT</Typography>
                 </Grid>
                 <Grid item container justifyContent='center' spacing={{xs:2}}>
                     <Grid item xs={9}>
@@ -117,8 +117,8 @@ const CreateAccount = () => {
                         <TextField fullWidth error={confirmPasswordError} helperText={confirmPasswordError} type='password' label='CONFIRM PASSWORD' value={confirmPassword} onChange={getConfirmPassword}/>
                     </Grid>
                     <Grid item xs={8.4}>
-                        <Button onClick={() => submitForm()} fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid white'}}>
-                            <Typography>
+                        <Button onClick={() => submitForm()} fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}}>
+                            <Typography color='silver'>
                                 Register
                             </Typography>
                         </Button>

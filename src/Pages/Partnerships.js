@@ -30,10 +30,10 @@ export default function Partnerships() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{backgroundColor:'dodgerblue', py:4}}>
+            <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)', py:4}}>
                 < Grid container direction={{xs: 'row', md: 'column'}} spacing={{xs:4}} alignItems='center' justifyContent='center' sx={{minHeight:'100vh', pt: {xs: 4, md:0}, backgroundColor:'transparent'}}>
                     <Grid item>
-                        <Typography variant='h3' fontWeight='bold'>PARTNERSHIPS</Typography>
+                        <Typography variant='h3' fontWeight='bold' color='silver'>PARTNERSHIPS</Typography>
                     </Grid>
                     <Grid item container justifyContent='space-around' spacing={4}>
                         {/* {resources.map((item, index) => {

@@ -47,10 +47,10 @@ const UserAccount = () => {
 
   return (
     <ThemeProvider theme={theme}>
-        <Box sx={{backgroundColor:'dodgerblue'}}>
+        <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)'}}>
             < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', pt: 4, backgroundColor:'transparent'}}>
                 <Grid item>
-                    <Typography variant='h3' fontWeight='bold'>{displayName}</Typography>
+                    <Typography variant='h3' fontWeight='bold' color='silver'>{displayName}</Typography>
                 </Grid>
                 <Grid>
                     <Button  onClick={() => {handleUserSignout(); navigate('/login')}} variant='contained' color='primary' size='large'>

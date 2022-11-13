@@ -81,7 +81,7 @@ export default function Admin() {
 
   return (
     // <div style={{paddingTop:50}}>{userProfileData.userRoles[0] === 'user' ? 'YOU ARE NOT AN ADMIN' : 'WELCOME ADMIN'}</div>
-    <Box sx={{pt: 10, backgroundColor:'dodgerblue', height:'100vh'}}>
+    <Box sx={{pt: 10, background:'linear-gradient(to left bottom, #004FFF, #005 120%)', height:'100vh'}}>
         { userProfileData && userProfileData.userRoles[0] === 'admin' ? (student ? <AdminChat student={student}/> : <><BootstrapButton variant='contained' onClick={handleAddResourceModalClickOpen}>
             Add Resource
         </BootstrapButton><TableContainer component={Paper} sx={{width:'100%'}}>

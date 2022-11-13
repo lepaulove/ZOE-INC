@@ -5,8 +5,8 @@ const GetInvolved = () => {
 
 
     return(
-        <div style={{backgroundColor:'yellow'}}>
-            <Container maxWidth='xl' sx={{display:'flex', justifyContent:'center', height:'75vh', backgroundColor:'yellow'}}>
+        <div style={{background:'linear-gradient(to left bottom, yellow, #005 120%)'}}>
+            <Container maxWidth='xl' sx={{display:'flex', justifyContent:'center', height:'75vh'}}>
                 <h1>BECOME A COMMUNITY STAKEHOLDER!</h1>
             </Container>
         </div>

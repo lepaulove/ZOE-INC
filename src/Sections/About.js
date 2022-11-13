@@ -5,8 +5,8 @@ const About = () => {
 
 
     return(
-        <div style={{backgroundColor:'orange'}}>
-            <Container maxWidth='xl' sx={{display:'flex', justifyContent:'center', height:'75vh', backgroundColor:'orange'}}>
+        <div style={{background:'linear-gradient(to left bottom, orange, #005 120%)'}}>
+            <Container maxWidth='xl' sx={{display:'flex', justifyContent:'center', height:'75vh'}}>
                 <h1>ABOUT</h1>
             </Container>
         </div>
