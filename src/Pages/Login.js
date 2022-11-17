@@ -31,7 +31,7 @@ const Login = () => {
     // })
 
     useEffect(() => {
-        currentUser ? navigate('/ZOE-INC') : console.log('No User Found')
+        currentUser ? navigate('/') : console.log('No User Found')
         return
     }, [currentUser])
 

@@ -1,7 +1,7 @@
 {
   "name": "zoe-inc-and-associates",
   "version": "0.1.0",
-  "homepage": "https://lepaulove.github.io/ZOE-INC/",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",

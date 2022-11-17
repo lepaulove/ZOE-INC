@@ -94,7 +94,7 @@ export default function MobileAppBar(props) {
                         </Box>
                         <Divider sx={{backgroundColor:'dodgerblue'}} variant='middle'/>
                         <List>
-                            <Link to='/ZOE-INC' style={{textDecoration: 'none'}}>
+                            <Link to='/' style={{textDecoration: 'none'}}>
                                 <ListItem>
                                     <ListItemButton onClick={toggleDrawer}>
                                         <Typography sx={{color:'white'}}>HOME</Typography>
