@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.eaa00d77.css",
-    "main.js": "/static/js/main.d0955db6.js",
+    "main.js": "/static/js/main.27ccebe8.js",
     "static/js/787.1a72c009.chunk.js": "/static/js/787.1a72c009.chunk.js",
     "static/media/Open Arms Logo.png": "/static/media/Open Arms Logo.414ddd0fc0e45d3c6981.png",
     "static/media/LOGO.png": "/static/media/LOGO.e848b5486353eb8a9059.png",
@@ -10,11 +10,11 @@
     "static/media/logo.svg": "/static/media/logo.db36153e906043854e743ee53cf5fff2.svg",
     "index.html": "/index.html",
     "main.eaa00d77.css.map": "/static/css/main.eaa00d77.css.map",
-    "main.d0955db6.js.map": "/static/js/main.d0955db6.js.map",
+    "main.27ccebe8.js.map": "/static/js/main.27ccebe8.js.map",
     "787.1a72c009.chunk.js.map": "/static/js/787.1a72c009.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.eaa00d77.css",
-    "static/js/main.d0955db6.js"
+    "static/js/main.27ccebe8.js"
   ]
 }
