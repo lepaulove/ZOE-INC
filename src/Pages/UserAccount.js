@@ -28,7 +28,7 @@ const UserAccount = () => {
             // const userData = async () => { const data = await getSnapshotFromUserAuth(currentUser); dispatch(setUserProfileData(data)) }
             // userData()
             // setDisplayName( () => userProfileInfo ? setDisplayName(userProfileInfo.data().displayName) : currentUser.displayName )
-            setDisplayName(userProfileData.displayName)  
+            setDisplayName(`${userProfileData.firstName} ${userProfileData.lastName}`)  
     }, [])
 
     const theme = createTheme({

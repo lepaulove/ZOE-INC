@@ -9,9 +9,10 @@ export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
 
-export const handleSignUp = async (displayName, email, password, confirmPassword) => {
+export const handleSignUp = async ({ formData }) => {
 
     let user = null
+    const { firstName, lastName, dob, email, password, confirmPassword } = formData
 
     try{
       if(password === confirmPassword){
@@ -19,7 +20,7 @@ export const handleSignUp = async (displayName, email, password, confirmPassword
         // .then(userCredentials => {
             // user = userCredentials
             console.log(user.user)
-            handleUserProfile( user.user, displayName )
+            handleUserProfile( user.user, { firstName, lastName, dob } )
             return user
         // }).catch(error => {console.log(error)})
       }else{
@@ -32,7 +33,7 @@ export const handleSignUp = async (displayName, email, password, confirmPassword
 }
 
 
-export const handleUserProfile = async(userAuth, additionalData) => {
+export const handleUserProfile = async(userAuth, additionalData ) => {
 
     // console.log(userAuth)
 
@@ -48,19 +49,20 @@ export const handleUserProfile = async(userAuth, additionalData) => {
     
 
     if(!snapshot.exists){
-        const  displayName  = additionalData
+        const  { firstName, lastName, dob }  = additionalData
         const { email } = userAuth
         const timeStamp = new Date()
         const userRoles = ['user']
-        console.log(displayName)
+        // console.log(displayName)
         console.log(userAuth)
         try{
             await userRef.set({
-                displayName,
+                firstName,
+                lastName,
+                dob,
                 email,
                 createdDate: timeStamp,
-                userRoles,
-                //...additionalData
+                userRoles
             })
         }catch(err){
             console.log(err)
