@@ -19,8 +19,9 @@ const CreateAccount = () => {
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [confirmPasswordError, setConfirmPasswordError] = useState('')
+    const [dobError, setDobError] = useState('')
     const [userAuthenticated, setUserAuthenticated] = useState(false)
-    const [dateValue, setDateValue] = React.useState(dayjs('2014-08-18T21:11:54'));
+    const [dateValue, setDateValue] = React.useState(dayjs(null));
     const [formData, setFormData] = useState({
       'firstName': '',
       'lastName': '',
@@ -39,13 +40,19 @@ const CreateAccount = () => {
 
     useEffect(() => {
         userAuthenticated ? navigate('/') : console.log('User Not Found')
-        // setFormData({...formData, dob: 'Jan 10 1991'})
     }, [userAuthenticated])
 
-    const handleChange = (newDateValue) => {
+    const resetErrors = () => {
+      setNameError('')
+      setEmailError('')
+      setPasswordError('')
+      setConfirmPasswordError('')
+    }
 
-        setFormData({...formData, dob:{day: newDateValue?.day(), month: newDateValue?.month() + 1, year: newDateValue?.year() }})
+    const handleChange = (newDateValue) => {
+      setFormData({...formData, dob:{day: newDateValue?.date(), month: newDateValue?.month() + 1, year: newDateValue?.year() }})
       setDateValue(newDateValue);
+      setDobError('')
     };
 
     console.log(formData)
@@ -53,11 +60,12 @@ const CreateAccount = () => {
     const submitForm = async () => {
       console.log('SUBMIT')
 
-        if(!formData.firstName | !formData.email | !formData.password | !formData.confirmPassword){
-            setNameError(formData.firstName ? '' : 'Name Field is Required...')
+        if(!formData.firstName | !formData.email | !formData.password | !formData.confirmPassword | !(formData.dob.month && formData.dob.day && formData.dob.year)){
+            setNameError(formData.firstName && formData.lastName ? '' : 'Name Fields are Required...')
             setEmailError(formData.email ? '' : 'Email Field is Required...')
             setPasswordError(formData.password ? '' : 'Password Field is Required...')
             setConfirmPasswordError(formData.confirmPassword ? '' : 'Confirm Password Field is Required...')
+            setDobError(formData.dob.month && formData.dob.day && formData.dob.year ? '' : 'Date of Birth is Required...')
             return
         } 
 
@@ -123,8 +131,8 @@ const CreateAccount = () => {
                 </Grid>
                 <Grid item container justifyContent='center' rowSpacing={{xs:2, md:4}} >
                     <Grid item container xs={11} md={9} columnSpacing={2}>
-                        <Grid item xs={6}><TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={nameError} helperText={nameError} label='FIRST NAME' value={formData.firstName} onChange={(e) => {setFormData({...formData, firstName: e.target.value})}}/></Grid>
-                        <Grid item xs={6}><TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={nameError} helperText={nameError} label='LAST NAME' value={formData.lastName} onChange={(e) => {setFormData({...formData, lastName: e.target.value})}}/></Grid>
+                        <Grid item xs={6}><TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={nameError} helperText={nameError} label='FIRST NAME' value={formData.firstName} onChange={(e) => {setFormData({...formData, firstName: e.target.value}); resetErrors()}}/></Grid>
+                        <Grid item xs={6}><TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={nameError} helperText={nameError} label='LAST NAME' value={formData.lastName} onChange={(e) => {setFormData({...formData, lastName: e.target.value}); resetErrors()}}/></Grid>
                     </Grid>
                     <Grid item container xs={11} md={9} columnSpacing={2}>
                         <Grid item xs={5} md={3}>
@@ -134,7 +142,7 @@ const CreateAccount = () => {
                             inputFormat="MM/DD/YYYY"
                             value={dateValue}
                             onChange={handleChange}
-                            renderInput={(params) => <TextField {...params} InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle}/>}
+                            renderInput={(params) => <TextField {...params} InputLabelProps={{style : {color : '#CC0099'} }} error={dobError} helperText={dobError} sx={textFieldStyle}/>}
                             
                           /></Box>
                           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}><MobileDatePicker
@@ -142,19 +150,19 @@ const CreateAccount = () => {
                             inputFormat="MM/DD/YYYY"
                             value={dateValue}
                             onChange={handleChange}
-                            renderInput={(params) => <TextField {...params} InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle}/>}
+                            renderInput={(params) => <TextField {...params} InputLabelProps={{style : {color : '#CC0099'} }} error={dobError} helperText={dobError} sx={textFieldStyle}/>}
                             
                           /></Box>
                           </LocalizationProvider>
                           {/* <DOBSelect formData={formData} setFormData={setFormData} textFieldStyle={textFieldStyle}/> */}
                         </Grid>
-                        <Grid item xs={7} md={9}><TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={nameError} helperText={nameError} label='EMAIL' value={formData.email} onChange={(e) => {setFormData({...formData, email: e.target.value})}}/></Grid>
+                        <Grid item xs={7} md={9}><TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={emailError} helperText={emailError} label='EMAIL' value={formData.email} onChange={(e) => {setFormData({...formData, email: e.target.value}); resetErrors()}}/></Grid>
                     </Grid>
                     <Grid item xs={11} md={9}>
-                        <TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={passwordError} helperText={passwordError} type='password' label='PASSWORD' value={formData.password} onChange={(e) => {setFormData({...formData, password: e.target.value})}}/>
+                        <TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={passwordError} helperText={passwordError} type='password' label='PASSWORD' value={formData.password} onChange={(e) => {setFormData({...formData, password: e.target.value}); resetErrors()}}/>
                     </Grid>
                     <Grid item xs={11} md={9}>
-                        <TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={confirmPasswordError} helperText={confirmPasswordError} type='password' label='CONFIRM PASSWORD' value={formData.confirmPassword} onChange={(e) => {setFormData({...formData, confirmPassword: e.target.value})}}/>
+                        <TextField InputLabelProps={{style : {color : '#CC0099'} }} sx={textFieldStyle} fullWidth error={confirmPasswordError} helperText={confirmPasswordError} type='password' label='CONFIRM PASSWORD' value={formData.confirmPassword} onChange={(e) => {setFormData({...formData, confirmPassword: e.target.value}); resetErrors()}}/>
                     </Grid>
                     <Grid item xs={7}>
                         <Button onClick={() => submitForm()} fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid #CC0099'}}>

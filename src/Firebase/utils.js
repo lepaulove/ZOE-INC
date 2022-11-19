@@ -20,20 +20,20 @@ export const handleSignUp = async ({ formData }) => {
         // .then(userCredentials => {
             // user = userCredentials
             console.log(user.user)
-            handleUserProfile( user.user, { firstName, lastName, dob } )
+            handleUserProfile( user.user, firstName, lastName, dob )
             return user
         // }).catch(error => {console.log(error)})
       }else{
           throw 'Passwords Do Not Match.'
       }
     }catch(err){
-      console.log(err)
+      console.log(err.code)
       throw err
     }  
 }
 
 
-export const handleUserProfile = async(userAuth, additionalData ) => {
+export const handleUserProfile = async(userAuth, firstName, lastName, dob ) => {
 
     // console.log(userAuth)
 
@@ -49,7 +49,7 @@ export const handleUserProfile = async(userAuth, additionalData ) => {
     
 
     if(!snapshot.exists){
-        const  { firstName, lastName, dob }  = additionalData
+        //const  { firstName, lastName, dob }  = additionalData
         const { email } = userAuth
         const timeStamp = new Date()
         const userRoles = ['user']
