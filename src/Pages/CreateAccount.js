@@ -43,7 +43,8 @@ const CreateAccount = () => {
     }, [userAuthenticated])
 
     const handleChange = (newDateValue) => {
-        setFormData({...formData, dob:{day: newDateValue.date(), month:newDateValue.month() + 1, year:newDateValue.year() }})
+
+        setFormData({...formData, dob:{day: newDateValue?.day(), month: newDateValue?.month() + 1, year: newDateValue?.year() }})
       setDateValue(newDateValue);
     };
 
