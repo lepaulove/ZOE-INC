@@ -12,7 +12,7 @@ const ResponsiveAppBar = ( props ) => {
   const theme = createTheme({
       palette:{
           primary:{
-              main:'#151515'
+              main:'#000'
           }
       }
   })

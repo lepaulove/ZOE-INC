@@ -21,6 +21,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
+import img from '../Media/images/family.png'
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -74,6 +75,7 @@ export default function MobileAppBar(props) {
                     aria-haspopup="true"
                     onClick={toggleDrawer}
                     color="inherit"
+                    sx={{ml:-3}}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -172,14 +174,16 @@ export default function MobileAppBar(props) {
                        <Toolbar />
                     </SwipeableDrawer>
                 </Box>
-                <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                <Box display={{xs:'flex', md:'none'}}>
+                    <img src={img} height='40px'></img>
+                </Box>
                 <Typography
                     variant="h5"
                     noWrap
                     component="a"
                     href="/"
                     sx={{
-                    mr: 2,
+                    mr: 6,
                     display: { xs: 'flex', md: 'none' },
                     flexGrow: 1,
                     fontFamily: 'monospace',
@@ -189,7 +193,7 @@ export default function MobileAppBar(props) {
                     textDecoration: 'none',
                     }}
                 >
-                    LOGO
+                    ZIA
                 </Typography>
     </>
   )

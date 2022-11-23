@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import img from './../Media/images/LOGO.png'
+import img from './../Media/images/family.png'
 
 const mapUserState = ({ user }) => ({
     currentUser: user.currentUser
@@ -37,9 +37,12 @@ export default function FullAppBar( props ) {
 
   return (
     <>
-        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        {/* <Box sx={{backgroundColor:'red', width:'50px', height:'50px'}}> */}
+            {/* <img src={img} width='50px' height='50px'/> */}
+        {/* </Box> */}
+        {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Typography
-                variant="h6"
+                variant="h4"
                 noWrap
                 component="a"
                 href="/"
@@ -52,7 +55,7 @@ export default function FullAppBar( props ) {
                 color: 'inherit',
                 textDecoration: 'none',
                 }}>
-                    LOGO
+                    ZIA
                 {/* <img style={{height:70, width:70}} src={img}></img> */}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
