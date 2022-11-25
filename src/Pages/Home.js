@@ -21,15 +21,15 @@ const Home = (props) => {
             <div ref={purposeRef}>
                 <Purpose />
             </div>
-            <div ref={aboutRef}>
-                <About />
+            <div ref={getInvolvedRef}>
+                <GetInvolved />
             </div>
             <div ref={contactRef}>
                 <Contact />
             </div>
-            <div ref={getInvolvedRef}>
-                <GetInvolved />
-            </div>
+            {/* <div ref={aboutRef}>
+                <About />
+            </div> */}
         </div>
     )
 }

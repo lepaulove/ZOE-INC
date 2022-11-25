@@ -18,7 +18,7 @@ function Header(props) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant='h5' color='darkred' fontWeight={600} fontSize={{xs:15, md:25}}>
+            <Typography variant='h5' color='#0066CC' fontWeight={600} fontSize={{xs:15, md:25}}>
               THE POWER OF LIFE...
             </Typography>
           </Grid>
