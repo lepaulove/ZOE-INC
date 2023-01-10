@@ -31,7 +31,10 @@ const Login = () => {
     // })
 
     useEffect(() => {
-        currentUser ? navigate('/') : console.log('No User Found')
+        if(currentUser)
+            navigate('/')
+        else
+            console.log('No User Found')
         return
     }, [currentUser])
 
@@ -55,6 +58,24 @@ const Login = () => {
             }
         }
     })
+
+    const textFieldStyle = {'& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#181824',
+          
+          color:'#FFF'
+        },
+        '&:hover fieldset': {
+          borderColor: 'lightgray',
+          color:'white'
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: 'white',
+          color:'#FFF'
+        },
+        backgroundColor: '#262A34',
+        color:'#FFF'
+      }}
 
     const handleLogin = async () => {
         try {
@@ -86,58 +107,38 @@ const Login = () => {
 
     return(
         <ThemeProvider theme={theme}>
-            <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 120%)'}}>
-                < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{height:'100vh', pt: 4, backgroundColor:'transparent'}}>
+            <Box sx={{backgroundColor:'#181824', height:'100vh'}}>
+                < Grid container direction='column' spacing={{xs:4}} alignItems='center' sx={{pt: 4, backgroundColor:'transparent'}}>
                     <Grid item>
                         <Typography variant='h3' fontWeight='bold' color='white'>LOGIN</Typography>
                     </Grid>
                     <Grid item container direction='row' justifyContent='center' spacing={{xs:2}}>
-                        <Grid item xs={9} md={6.01}>
-                            <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'silver',
-      },
-      '&:hover fieldset': {
-        borderColor: 'lightgray',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'white',
-      },
-      '&.Mui-focused': {
-        color: 'white',
-      },
-    }}} fullWidth type='email' helperText={passwordError ? '' : emailError} error={emailError ? true : false} label='EMAIL' value={email} onChange={getEmail} />
+                    <Grid item>
+                        <Typography variant='p' fontWeight='bold' color='white'>Welcome back to Z.I.A</Typography>
+                    </Grid>
+                        <Grid item xs={11} md={6.01}>
+                            <TextField InputLabelProps={{style : {color : 'silver'} }} sx={textFieldStyle} fullWidth type='email' helperText={passwordError ? '' : emailError} error={emailError ? true : false} label='EMAIL' value={email} onChange={getEmail} />
                         </Grid>
-                        <Grid item xs={9} md={6.01}>
-                            <TextField InputLabelProps={{style : {color : 'silver'} }} sx={{'& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'silver',
-      },
-      '&:hover fieldset': {
-        borderColor: 'lightgray',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'white',
-      },
-    }}} fullWidth type='password' helperText={passwordError} error={passwordError ? true : false} label='PASSWORD' value={password} onChange={getPassword}/>
+                        <Grid item xs={11} md={6.01}>
+                            <TextField InputLabelProps={{style : {color : 'silver'} }} sx={textFieldStyle} fullWidth type='password' helperText={passwordError} error={passwordError ? true : false} label='PASSWORD' value={password} onChange={getPassword}/>
                         </Grid>
-                        <Grid item xs={8.4} md={6.01}>
-                            <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}} onClick={handleLogin}>
-                                <Typography color='silver'>
+                        <Grid item xs={11} md={6.01}>
+                            <Button fullWidth size='large' variant='contained' color='primary' sx={{backgroundColor:'#36BAFE'}} onClick={handleLogin}>
+                                <Typography color='#FFF' fontWeight='bold' fontSize={25}>
                                     LOGIN
                                 </Typography>
                             </Button>
                         </Grid>
-                        <Grid item xs={8.4} md={6.01}>
-                            <Link to='/register'>
-                                <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid silver'}} /*</Grid>onClick={() => {navigate('/register')}}*/>
-                                    <Typography sx={{textDecoration: 'none', color:'silver'}}>
+                        <Grid item xs={11} md={6.01}>
+                            <Link to='/register'  style={{textDecoration: 'none'}}>
+                                <Button fullWidth size='large' variant='contained' color='primary' sx={{border:'2px solid #36BAFE'}} /*</Grid>onClick={() => {navigate('/register')}}*/>
+                                    <Typography color='#FFF' fontWeight='bold' fontSize={25}>
                                         Register
                                     </Typography>
                                 </Button>
                             </Link>
                             <Grid item xs={7} pt={1} >
-                                <Link to='/reset-password'>
+                                <Link to='/reset-password' style={{textDecoration: 'none'}}>
                                     <Typography color='white' variant='button' sx={{fontSize:{xs:12, md:15}, '&:hover':{cursor:'pointer'}}}>
                                         Forgot Password?
                                     </Typography>

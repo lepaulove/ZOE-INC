@@ -11,7 +11,7 @@ const HistorySection = () => {
 
 
     return(
-        <Box sx={{background:'linear-gradient(to left bottom, #004FFF, #005 70%)', pt:5, pb:2}}>
+        <Box sx={{background:'transparent', pt:5, pb:2}}>
             <Paper sx={{my:{xs:2, md:15}, mx:{xs:2, md:7}, pt: 4, background:'linear-gradient(to left bottom, #000, #fff 180%)'}}>
                 <Grid container justifyContent='center' direction='column' alignItems='center'>
                     <Grid item>

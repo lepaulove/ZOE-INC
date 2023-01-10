@@ -75,7 +75,7 @@ export default function MobileAppBar(props) {
                     aria-haspopup="true"
                     onClick={toggleDrawer}
                     color="inherit"
-                    sx={{ml:-3}}
+                    sx={{ml:-3, border:'1px solid white', borderRadius:2, p:1 }}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -87,7 +87,7 @@ export default function MobileAppBar(props) {
                         sx={{                            
                             width: 245,
                             flexShrink: 0,
-                            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box', backgroundColor:'black', color:'white' },
+                            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box', backgroundColor:'#181824', color:'white' },
                         }}
                     >
                         <Box sx={{display:'flex', alignItems:'center', justifyContent:'center', pt:4}}>

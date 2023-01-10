@@ -83,10 +83,9 @@ export const UserContext = createContext()
             purposeRef={purposeRef}
             aboutRef={aboutRef}
             contactRef={contactRef}
-            getInvolvedRef={getInvolvedRef}
-            />       
-            <Routes>
-                <Route exact path='/' element={<Home historyRef={historyRef} purposeRef={purposeRef} aboutRef={aboutRef} contactRef={contactRef} getInvolvedRef={getInvolvedRef}/>}/>
+            getInvolvedRef={getInvolvedRef}/>       
+            <Routes><Route exact path='/' element={<Home historyRef={historyRef} purposeRef={purposeRef} aboutRef={aboutRef} contactRef={contactRef} getInvolvedRef={getInvolvedRef}/>}/>
+                
                 <Route exact path='/login' element={<Login />}/>
                 <Route exact path='/register' element={<CreateAccount />}/>
                 <Route exact path='/my-account' element={<UserAccount />}/>

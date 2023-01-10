@@ -102,7 +102,9 @@ export default function Admin() {
                         return(
                         <TableRow key={index}  sx={{ "&:hover":{color:'#0FF', backgroundColor:'#555'}}}>
                             <TableCell>
-                                <Typography color='yellow'>{user.data().displayName ? user.data().displayName : 'NO NAME WAS ENTERED'}</Typography>
+                                {<Typography color='yellow'>{user.data().firstName ? `${user.data().firstName} ${user.data().lastName}` : user.data().displayName ? user.data().displayName : 'NO NAME WAS ENTERED'}</Typography>}
+                                
+                                {/* <Typography color='yellow'>{user.data().displayName ? user.data().displayName : 'NO NAME WAS ENTERED'}</Typography> */}
                             </TableCell>
                             <TableCell>
                                 <Typography color='yellow'>{user.data().email}</Typography>

@@ -2,9 +2,11 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { createTheme, ThemeProvider, Typography } from '@mui/material';
 import FullAppBar from './FullAppBar'
 import MobileAppBar from './MobileAppBar'
+import img from './../Media/images/family.png'
 
 
 const ResponsiveAppBar = ( props ) => {
@@ -12,7 +14,7 @@ const ResponsiveAppBar = ( props ) => {
   const theme = createTheme({
       palette:{
           primary:{
-              main:'#000'
+              main:'#181824'
           }
       }
   })
