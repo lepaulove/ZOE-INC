@@ -18,6 +18,7 @@ import AdminChat from './Pages/AdminChat'
 import WithUserData from './Pages/PrivateChat'
 import Partnerships from './Pages/Partnerships';
 import Stakeholder from './Pages/StakeholderReferal';
+import { Grid, Typography } from '@mui/material';
 
 
 
@@ -99,6 +100,7 @@ export const UserContext = createContext()
                 <Route exact path='/private-chat' element={/*userProfileData.userRoles[0] === 'admin' ? <PrivateChat /> : */<PrivateChat />} /> 
                 <Route exact path='/stakeholder-referal' element={<Stakeholder/>} />
             </Routes>
+            <Grid container alignItems='center' sx={{backgroundColor:'#36BAFE', width:'100vw', height:40, px:1}}><Typography color='#FFF'>ZOE INC</Typography></Grid>
         </Router>
     </div>
   );
